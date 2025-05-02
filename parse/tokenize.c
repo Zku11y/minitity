@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:52:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/01 13:47:29 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/01 17:30:31 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ t_input *tokenize(char *line)
 		tmp = tmp->next;
 		i++;
 	}
-    lst_print(list);
-    printf("\e[1;32mSuccess!\e[0m\n");
-	ft_lstfree(list);
-    return (NULL);
+    return (list);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/01 13:46:44 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/01 19:00:07 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	lst_print(t_input *head)
 {
 	char	*data;
+	t_input *og;
 	int	size;
 
+	og = head;
 	size = 0;
 	if (!head)
 		printf("\033[1;31mhead 5awi a zmr\033[0m\n");
@@ -31,36 +33,47 @@ void	lst_print(t_input *head)
 		printf("\033[1;37m -> \033[0m");
 		head = head->next;
 	}
+	// size = 0;
+	// while (head != og)
+	// {
+	// 	size++;
+	// 	data = head->value;
+	// 	if (data == NULL)
+	// 		printf("\033[1;31m%d\033[0m", 0);
+	// 	else
+	// 		printf("\033[1;34m%d\033[0m : \033[1;36m\"%s\"\033[0m", head->type, data);
+	// 	printf("\033[1;37m -> \033[0m");
+	// 	head = head->prev;
+	// }
 	printf("\033[1;35mNULL\033[0m");
 	printf("\033[1;33m %d\033[0m\n", size);
 }
 
-t_input	*ft_lstnew(char *content)
+void lst_assign(t_input **new, t_input **lst)
 {
 	t_input	*ptr;
+    t_input *prev;
 
-	ptr = malloc(sizeof(t_input));
-	if (ptr == NULL)
-		return (NULL);
-	ptr->value = content;
-	ptr->next = NULL;
-	ptr->prev = NULL;
-	return (ptr);
+    prev = NULL;
+	ptr = *lst;
+    while (ptr->next)
+    {
+        prev = ptr;
+        ptr = ptr->next;
+    }
+    ptr->prev = prev;
+	ptr->next = (*new);
+	(*lst)->tail = ptr;
 }
 
 void	ft_lstadd_back(t_input **lst, char *content)
 {
-	t_input	*ptr;
-    t_input *prev;
     t_input *new;
 
-    prev = NULL;
-	new = malloc(sizeof(t_input));
+	new = ft_calloc(sizeof(t_input), 1);
 	if (new == NULL)
 		return ;
 	new->value = content;
-	new->next = NULL;
-    ptr = *lst;
 	if (!lst || !new)
 		return ;
 	if (!*lst)
@@ -68,13 +81,7 @@ void	ft_lstadd_back(t_input **lst, char *content)
 		*lst = new;
 		return ;
 	}
-    while (ptr->next)
-    {
-        prev = ptr;
-        ptr = ptr->next;
-    }
-    ptr->prev = prev;
-	ptr->next = new;
+	lst_assign(&new, lst);
 }
 
 t_input	*ft_lstlast(t_input *lst)

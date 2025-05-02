@@ -2,7 +2,7 @@ NAME = minishell
 
 SRC = src/minishell.c parse/tokenize.c parse/delimiters.c \
 	  parse/filter.c parse/lst_functions.c parse/operators.c \
-	  utils/libft_func.c
+	  utils/libft_func.c utils/libft_func2.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -17,10 +17,10 @@ $(NAME):$(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm $(OBJ)
+	rm -f $(OBJ)
 
 fclean: clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
