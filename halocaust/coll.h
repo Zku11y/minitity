@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   oven.c                                             :+:      :+:    :+:   */
+/*   coll.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 00:59:45 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/04/27 01:13:24 by oel-mado         ###   ########.fr       */
+/*   Created: 2025/04/27 00:52:54 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/04/27 18:28:05 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "halocaust.h"
+#ifndef COLL_H
+# define COLL_H
 
-void	oven(t_jews *jwes)
+# include <stdlib.h>
+
+// struct
+typedef struct s_col
 {
-	t_jews	*the_jew;
-	t_jews	*tmp_jew;
+	void		*vd;
+	t_col		*next_clo;
+}				t_col;
 
-	tmp_jew = jwes;
-	while (tmp_jew->next_jew)
-	{
-		the_jew = tmp_jew;
-		tmp_jew = tmp_jew->next_jew;
-		free(the_jew->jew);
-	}
-}
+void	*ft_collc(size_t count, size_t size);
+
+#endif //COLL_H

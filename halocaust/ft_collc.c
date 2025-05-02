@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   halocaust.h                                        :+:      :+:    :+:   */
+/*   ft_collc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 00:52:54 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/04/27 18:28:05 by oel-mado         ###   ########.fr       */
+/*   Created: 2024/10/28 03:35:53 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/04/27 15:19:48 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HALOCAUST_H
-# define HALOCAUST_H
+#include "coll.h"
 
-# include <stdlib.h>
-
-// struct
-typedef struct s_jews
+void	*ft_collc(size_t count, size_t size)
 {
-	void		*jew;
-	t_jews		*next_jew;
-}				t_jews;
+	void	*ptr;
+	size_t	i;
+	size_t	t;
 
-void	*ft_calloc(size_t count, size_t size);
-
-#endif //HALOCAUST_H
+	i = 0;
+	if (size > 0 && count >= SIZE_MAX / size)
+		return (NULL);
+	ptr = malloc(size * count);
+	if (!ptr)
+		return (NULL);
+	if (size == 0 || count == 0)
+		return (ptr);
+	else
+	{
+		t = count * size;
+		while (i < t)
+			((unsigned char *)ptr)[i++] = (unsigned char)0;
+	}
+	// listt(ptr);
+	return (ptr);
+}

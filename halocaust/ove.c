@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   train.c                                            :+:      :+:    :+:   */
+/*   ove.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 01:12:09 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/04/27 18:19:58 by oel-mado         ###   ########.fr       */
+/*   Created: 2025/04/27 00:59:45 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/04/27 01:13:24 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "halocaust.h"
+#include "coll.h"
 
-void	train(void *jew)
+void	ove(t_coll *coll)
 {
-	t_jews	*jews;
+	t_coll	*the_coll;
+	t_coll	*tmp_coll;
 
-	jews = malloc (sizeof(t_jews));
-	if (!jews)
-		ult();
-	jews->next_jew = NULL;
+	tmp_coll = coll;
+	while (tmp_coll->next_coll)
+	{
+		the_coll = tmp_coll;
+		tmp_coll = tmp_coll->next_coll;
+		free(the_coll->coll);
+	}
 }
