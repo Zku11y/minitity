@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:41:24 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/01 13:45:50 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/02 02:49:30 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int handle_pipe(t_input **list, char *line)
 
 	if(line[0] == '|' && line[1] != '|')
 	{
-		printf("pipe is being handled\n");
 		ft_lstadd_back(list, ft_strdup("|"));
 		tmp = ft_lstlast(*list);
 		tmp->type = TOKEN_PIPE;

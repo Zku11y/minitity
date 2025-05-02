@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Token_and_lex.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/01 13:44:43 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/02 02:47:51 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ typedef struct nodes
     char *value;
     struct nodes *next;
     struct nodes *prev;
+    struct nodes *tail;
 }   t_input;
 
+
 t_input *tokenize(char *line);
+void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
 char	*ft_strndup(const char *s1, int n);
-t_input	*ft_lstnew(char *content);
 void	ft_lstadd_back(t_input **lst, char *content);
 t_input	*ft_lstlast(t_input *lst);
 size_t	ft_strlen(const char *s);
@@ -69,4 +71,6 @@ int handle_and_or(t_input **list, char *line);
 int handle_par(t_input **list, char *line);
 int handle_quotes(t_input **list, char *line);
 int handle_word(t_input **list, char *line);
-bool check_limit(char c);
+bool check_limit(char *line, int i);
+
+void filter(t_input *list);

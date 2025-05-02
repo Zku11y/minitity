@@ -58,6 +58,7 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "readline.h": "c",
-    "token_and_lex.h": "c"
+    "token_and_lex.h": "c",
+    "random": "c"
   }
 }
