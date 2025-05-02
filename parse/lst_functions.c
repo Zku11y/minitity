@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/01 19:00:07 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/02 01:49:47 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	lst_print(t_input *head)
 {
 	char	*data;
-	t_input *og;
+	// t_input *og;
 	int	size;
 
-	og = head;
+	// og = head;
 	size = 0;
 	if (!head)
 		printf("\033[1;31mhead 5awi a zmr\033[0m\n");

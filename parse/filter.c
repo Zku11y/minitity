@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:37:25 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/01 22:34:47 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/02 02:25:19 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ void check_ops(t_input *list)
     checker = false;
     while(iter)
     {
+        // if(iter->type == TOKEN_PIPE)
+            // printf("iter->prev = %s, iter->next = %s\n", iter->prev->value, iter->next->value);
+        if(iter->type == TOKEN_PIPE && (!(iter->prev->value) || !(iter->next->value)))
+            return(syntax_error(iter->type, list));
+        if((iter->type == TOKEN_AND || iter->type == TOKEN_OR) && (!(iter->prev->value) || !(iter->next->value)))
+            return(syntax_error(iter->type, list));
+        if((iter->type == TOKEN_R_RED || iter->type == TOKEN_L_RED) && !(iter->next->value))
+            return(syntax_error(iter->type, list));
+        if((iter->type == TOKEN_R_APP || iter->type == TOKEN_L_APP) && !(iter->next->value))
+            return(syntax_error(iter->type, list));
         if(iter->category == TOKEN_OP && checker == false)
             checker = true;
         else if(iter->category != TOKEN_OP && checker == true)

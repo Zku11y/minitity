@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:52:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/01 17:30:31 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/02 02:47:21 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Token_and_lex.h"
 
-bool check_limit(char c)
+bool check_limit(char *line, int i)
 {
-	if(c == '<' || c == '>')
+	if(line[i] == '<' || line[i] == '>')
 		return (true);
-	else if(c == '|' || c == '&')
+	else if(line[i] == '|' || (line[i] == '&' && line[i + 1] == '&'))
 		return (true);
-	else if(c == '(' || c == ')')
+	else if(line[i] == '(' || line[i] == ')')
 		return (true);
-	else if(c == '"' || c == '\'')
+	else if(line[i] == '"' || line[i] == '\'')
 		return (true);
-	else if(is_space(c))
+	else if(is_space(line[i]))
 		return (true);
 	return (false);
 }
@@ -33,7 +33,7 @@ int handle_word(t_input **list, char *line)
 	i = 0;
 	while(line[i])
 	{
-		if (check_limit(line[i]))
+		if (check_limit(line, i))
 			break;
 		i++;
 	}
