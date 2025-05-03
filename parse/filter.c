@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:37:25 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/02 02:25:19 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/03 16:00:47 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Token_and_lex.h"
 
-void syntax_error(token type, t_input *list)
+void syntax_error(t_token type, t_input *list)
 {
     if(type == TOKEN_PIPE)
         printf("Syntax Error near unexpected Token '|'");

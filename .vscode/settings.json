@@ -59,6 +59,7 @@
   "files.associations": {
     "readline.h": "c",
     "token_and_lex.h": "c",
-    "random": "c"
+    "random": "c",
+    "history.h": "c"
   }
 }

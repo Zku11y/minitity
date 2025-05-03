@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/02 01:49:47 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/03 19:07:20 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,48 @@ void	lst_print(t_input *head)
 		size++;
 		data = head->value;
 		if (data == NULL)
-			printf("\033[1;31m%d\033[0m", 0);
+			printf("\033[1;31m%s\033[0m", data);
 		else
-			printf("\033[1;34m%d\033[0m : \033[1;36m\"%s\"\033[0m", head->type, data);
+		{
+			if(head->type == TOKEN_WORD)
+				printf("\033[1;34m%s\033[0m", "WORD");
+			else if(head->type == TOKEN_OP)
+				printf("\033[1;34m%s\033[0m", "OP");
+			else if(head->type == TOKEN_CMD)
+				printf("\033[1;34m%s\033[0m", "CMD");
+			else if(head->type == TOKEN_ARG)
+				printf("\033[1;34m%s\033[0m", "ARG");
+			else if(head->type == TOKEN_FILE)
+				printf("\033[1;34m%s\033[0m", "FILE");
+			else if(head->type == TOKEN_R_RED)
+				printf("\033[1;34m%s\033[0m", "R_RED");
+			else if(head->type == TOKEN_L_RED)
+				printf("\033[1;34m%s\033[0m", "L_RED");
+			else if(head->type == TOKEN_R_APP)
+				printf("\033[1;34m%s\033[0m", "R_APP");
+			else if(head->type == TOKEN_L_APP)
+				printf("\033[1;34m%s\033[0m", "L_APP");
+			else if(head->type == TOKEN_PIPE)
+				printf("\033[1;34m%s\033[0m", "PIPE");
+			else if(head->type == TOKEN_S_QUOTE)
+				printf("\033[1;34m%s\033[0m", "S_QUOTE");
+			else if(head->type == TOKEN_D_QUOTE)
+				printf("\033[1;34m%s\033[0m", "D_QUOTE");
+			else if(head->type == TOKEN_O_PAR)
+				printf("\033[1;34m%s\033[0m", "O_PAR");
+			else if(head->type == TOKEN_C_PAR)
+				printf("\033[1;34m%s\033[0m", "C_PAR");
+			else if(head->type == TOKEN_AND)
+				printf("\033[1;34m%s\033[0m", "AND");
+			else if(head->type == TOKEN_OR)
+				printf("\033[1;34m%s\033[0m", "OR");
+			else if(head->type == TOKEN_EOF)
+				printf("\033[1;34m%s\033[0m", "EOF");
+			printf(" : \033[1;36m%s\033[0m", data);
+		}
 		printf("\033[1;37m -> \033[0m");
 		head = head->next;
 	}
-	// size = 0;
-	// while (head != og)
-	// {
-	// 	size++;
-	// 	data = head->value;
-	// 	if (data == NULL)
-	// 		printf("\033[1;31m%d\033[0m", 0);
-	// 	else
-	// 		printf("\033[1;34m%d\033[0m : \033[1;36m\"%s\"\033[0m", head->type, data);
-	// 	printf("\033[1;37m -> \033[0m");
-	// 	head = head->prev;
-	// }
 	printf("\033[1;35mNULL\033[0m");
 	printf("\033[1;33m %d\033[0m\n", size);
 }

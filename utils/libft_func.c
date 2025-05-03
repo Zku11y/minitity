@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:47:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/01 13:47:55 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/02 17:52:12 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	str = malloc(ft_strlen(s1) + 1);
+	getenv("PWD");
 	if (str == NULL)
 		return (NULL);
 	i = 0;

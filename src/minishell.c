@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:16:23 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/02 02:48:22 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/03 18:23:45 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,12 @@ void manager(char *line)
 {
     t_input *input;
 
+    checker(line);
     input = tokenize(line);
     lst_print(input);
     filter(input);
     printf("\e[1;32mSuccess!\e[0m\n");
     ft_lstfree(input);
-}
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	size_t	i;
-	size_t	s1_len;
-
-	i = 0;
-	s1_len = ft_strlen(s1);
-	while (i < s1_len)
-	{
-		if (s1[i] != s2[i])
-			return (((unsigned char)s1[i]) - ((unsigned char)s2[i]));
-		i++;
-	}
-	return (0);
 }
 
 int prompt_msg(char **line)
@@ -59,7 +45,7 @@ int main()
     {
         if(prompt_msg(&line) == 0)
             return 0;
-        printf("%s\n", line);
+        // printf("%s\n", line);
         free(line);
     }
 }

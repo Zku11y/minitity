@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_func2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:59:49 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/02 01:50:00 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/03 18:07:10 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,18 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	ft_memset(ptr, '\0', size * count);
 	return (ptr);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (((unsigned char)s1[i]) - ((unsigned char)s2[i]));
+		i++;
+	}
+	return (0);
 }
