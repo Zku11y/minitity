@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:52:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/02 02:47:21 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/04 15:17:19 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Token_and_lex.h"
+
+int skip_spaces(char *line, int i)
+{
+	while(is_space(line[i]) && line[i])
+		i++;
+	return i;
+}
 
 bool check_limit(char *line, int i)
 {
@@ -57,16 +64,14 @@ void assign_tokens(t_input **list, char *line)
 	i = 0;
 	while(line[i])
 	{
-		while(is_space(line[i]))
-			i++;
+		i = skip_spaces(line, i);
 		i += handle_pipe(list, line + i);
 		i += handle_and_or(list, line + i);
 		i += handle_red(list, line + i);
 		i += handle_app(list, line + i);
-		i += handle_quotes(list, line + i);
 		i += handle_par(list, line + i);
-		// printf("i = %d\n", i);
 		i += handle_word(list, line + i);
+		i += handle_quotes(list, line + i);
 	}
 }
 

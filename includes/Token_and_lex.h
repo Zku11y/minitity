@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/03 18:07:28 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/04 15:30:05 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ typedef enum s_tokens
     TOKEN_R_APP,
     TOKEN_L_APP,
     TOKEN_PIPE,
-    TOKEN_S_QUOTE,
-    TOKEN_D_QUOTE,
     TOKEN_O_PAR,
     TOKEN_C_PAR,
     TOKEN_AND,

@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/03 19:07:20 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/04 15:30:27 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ void	lst_print(t_input *head)
 				printf("\033[1;34m%s\033[0m", "L_APP");
 			else if(head->type == TOKEN_PIPE)
 				printf("\033[1;34m%s\033[0m", "PIPE");
-			else if(head->type == TOKEN_S_QUOTE)
-				printf("\033[1;34m%s\033[0m", "S_QUOTE");
-			else if(head->type == TOKEN_D_QUOTE)
-				printf("\033[1;34m%s\033[0m", "D_QUOTE");
 			else if(head->type == TOKEN_O_PAR)
 				printf("\033[1;34m%s\033[0m", "O_PAR");
 			else if(head->type == TOKEN_C_PAR)
