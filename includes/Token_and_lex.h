@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/04 15:30:05 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/05 22:22:59 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum s_tokens
     TOKEN_WORD,
     TOKEN_OP,
     TOKEN_DELIMITER,
+    TOKEN_RED_APP,
     TOKEN_CMD,
     TOKEN_ARG,
     TOKEN_FILE,
@@ -46,6 +47,7 @@ typedef struct s_nodes
     int index;
     t_token type;
     t_token category;
+    bool red_app;
     char *value;
     struct s_nodes *next;
     struct s_nodes *prev;
@@ -77,5 +79,6 @@ bool check_limit(char *line, int i);
 
 void filter(t_input *list);
 void checker(char *line);
+void seperator(t_input *list);
 
 #endif
