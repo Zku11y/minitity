@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:37:25 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/02 02:25:19 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/04 14:44:24 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Token_and_lex.h"
 
-void syntax_error(token type, t_input *list)
+void syntax_error(t_token type, t_input *list)
 {
     if(type == TOKEN_PIPE)
         printf("Syntax Error near unexpected Token '|'");
@@ -43,7 +43,7 @@ void check_ops(t_input *list)
     {
         // if(iter->type == TOKEN_PIPE)
             // printf("iter->prev = %s, iter->next = %s\n", iter->prev->value, iter->next->value);
-        if(iter->type == TOKEN_PIPE && (!(iter->prev->value) || !(iter->next->value)))
+        if(iter->type == TOKEN_PIPE && (!(iter->prev) || !(iter->next->value)))
             return(syntax_error(iter->type, list));
         if((iter->type == TOKEN_AND || iter->type == TOKEN_OR) && (!(iter->prev->value) || !(iter->next->value)))
             return(syntax_error(iter->type, list));
@@ -57,7 +57,6 @@ void check_ops(t_input *list)
             checker = false;
         else if (iter->category == TOKEN_OP && checker == true)
             return(syntax_error(iter->type, list));
-        
         iter = iter->next;
     }
 }
