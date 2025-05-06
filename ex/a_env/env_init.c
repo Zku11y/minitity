@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_pwd.c                                            :+:      :+:    :+:   */
+/*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 09:05:34 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/06 00:26:23 by oel-mado         ###   ########.fr       */
+/*   Created: 2025/05/05 23:13:09 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/06 00:00:41 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head.h"
 
-int	b_pwd(t_data *data)
+t_env	*env_init(t_data *data, char **old_env)
 {
-	int	size;
+	int		i;
+	int		j;
+	t_env	*neo;
 
-	size = 0;
-	if (!(data->env)->valve)
-		return 1;
-	size = ft_strlen((data->env)->valve);
-	if (!size)
-		return 1;
-	if (write(1, (data->env)->valve, size) == -1)
-		return 1;
-	return 0;	
+	i = 0;
+	j = 0;
+	neo = NULL;
+	while (old_env[i])
+	{
+		while (old_env)
+		{
+			env_add();
+			i++;
+		}
+		i++;
+	}
+	return (neo);
 }
+

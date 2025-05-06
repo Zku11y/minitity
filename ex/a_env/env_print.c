@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_pwd.c                                            :+:      :+:    :+:   */
+/*   env_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 09:05:34 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/06 00:26:23 by oel-mado         ###   ########.fr       */
+/*   Created: 2025/05/06 00:18:21 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/06 00:21:57 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../head.h"
 
-int	b_pwd(t_data *data)
+void	env_print(t_data *data)
 {
-	int	size;
-
-	size = 0;
-	if (!(data->env)->valve)
-		return 1;
-	size = ft_strlen((data->env)->valve);
-	if (!size)
-		return 1;
-	if (write(1, (data->env)->valve, size) == -1)
-		return 1;
-	return 0;	
+	while ((data->env)->next)
+		printf("%s=%s\n", (data->env)->name, (data->env)->valve);
 }
