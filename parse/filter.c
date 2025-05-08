@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:37:25 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/04 14:44:24 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/06 16:10:06 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void syntax_error(t_token type, t_input *list)
     exit(EXIT_FAILURE);
 }
 
-void check_ops(t_input *list)
+// this function manages the first level of syntax checking (words, operators, delimiters)
+void filter(t_input *list)
 {
     t_input *iter;
     bool checker;
@@ -41,8 +42,6 @@ void check_ops(t_input *list)
     checker = false;
     while(iter)
     {
-        // if(iter->type == TOKEN_PIPE)
-            // printf("iter->prev = %s, iter->next = %s\n", iter->prev->value, iter->next->value);
         if(iter->type == TOKEN_PIPE && (!(iter->prev) || !(iter->next->value)))
             return(syntax_error(iter->type, list));
         if((iter->type == TOKEN_AND || iter->type == TOKEN_OR) && (!(iter->prev->value) || !(iter->next->value)))
@@ -59,9 +58,4 @@ void check_ops(t_input *list)
             return(syntax_error(iter->type, list));
         iter = iter->next;
     }
-}
-// this function manages the first level of syntax checking (words, operators, delimiters)
-void filter(t_input *list)
-{
-    check_ops(list);
 }
