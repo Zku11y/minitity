@@ -7,7 +7,7 @@ OBJ = $(SRC:.c=.o)
 CC = cc #-Wall -Wextra -Werror
 
 a:
-	cc main.c a_env/env_init.c a_env/env_add.c libft/libft.a -o tst
+	cc main.c a_env/env_init.c a_env/env_del.c a_env/env_add.c libft/libft.a -o tst
 	./tst
 	rm -f tst
 

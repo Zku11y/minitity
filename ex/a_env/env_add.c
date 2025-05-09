@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 23:16:17 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/07 08:25:23 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/09 18:26:30 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ int	env_add(char *name, char *valve, t_data *data)
 	t_env	*tmp;
 	t_env	*neo;
 
-	tmp = data->env;
-	printf("\033[31;1mADD %s\033[0m\n", data->env->name);
-	while (tmp->next)
-		tmp = (data->env)->next;
+	if (data->env->next == NULL)
+		tmp = data->env;
+	else
+	{
+		tmp = data->env;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+	}
 	neo = ft_calloc(sizeof(t_env), 1);
 	if (!neo)
 		return (1);
