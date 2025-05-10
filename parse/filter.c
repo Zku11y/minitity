@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:37:25 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/06 16:10:06 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/09 13:48:28 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void syntax_error(t_token type, t_input *list)
 {
     if(type == TOKEN_PIPE)
-        printf("Syntax Error near unexpected Token '|'");
+        printf("Syntax Error near unexpected Token '|' ");
     if(type == TOKEN_R_RED)
-        printf("Syntax Error near unexpected Token '>'");
+        printf("Syntax Error near unexpected Token '>' ");
     if(type == TOKEN_L_RED)
-        printf("Syntax Error near unexpected Token '<'");
+        printf("Syntax Error near unexpected Token '<' ");
     if(type == TOKEN_R_APP)
-        printf("Syntax Error near unexpected Token '>>'");
+        printf("Syntax Error near unexpected Token '>>' ");
     if(type == TOKEN_L_APP)
-        printf("Syntax Error near unexpected Token '<<'");
+        printf("Syntax Error near unexpected Token '<<' ");
     if(type == TOKEN_AND)
-        printf("Syntax Error near unexpected Token '&&'");
+        printf("Syntax Error near unexpected Token '&&' ");
     if(type == TOKEN_OR)
-        printf("Syntax Error near unexpected Token '||'");
+        printf("Syntax Error near unexpected Token '||' ");
     ft_lstfree(list);
     exit(EXIT_FAILURE);
 }
@@ -43,19 +43,19 @@ void filter(t_input *list)
     while(iter)
     {
         if(iter->type == TOKEN_PIPE && (!(iter->prev) || !(iter->next->value)))
-            return(syntax_error(iter->type, list));
+            return(printf("1 : %d\n", iter->index) ,syntax_error(iter->type, list));
         if((iter->type == TOKEN_AND || iter->type == TOKEN_OR) && (!(iter->prev->value) || !(iter->next->value)))
-            return(syntax_error(iter->type, list));
+            return(printf("2 : %d\n", iter->index) ,syntax_error(iter->type, list));
         if((iter->type == TOKEN_R_RED || iter->type == TOKEN_L_RED) && !(iter->next->value))
-            return(syntax_error(iter->type, list));
+            return(printf("3 : %d\n", iter->index) ,syntax_error(iter->type, list));
         if((iter->type == TOKEN_R_APP || iter->type == TOKEN_L_APP) && !(iter->next->value))
-            return(syntax_error(iter->type, list));
-        if(iter->category == TOKEN_OP && checker == false)
+            return(printf("4 : %d\n", iter->index) ,syntax_error(iter->type, list));
+        if(iter->category == TOKEN_OP && checker == false && iter->type != TOKEN_PIPE)
             checker = true;
         else if(iter->category != TOKEN_OP && checker == true)
             checker = false;
         else if (iter->category == TOKEN_OP && checker == true)
-            return(syntax_error(iter->type, list));
+            return(printf("5 : %d\n", iter->index) ,syntax_error(iter->type, list));
         iter = iter->next;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:13:20 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/05 22:31:00 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/09 11:45:37 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ void handle_cmd(t_input *list)
             list->type = TOKEN_CMD;
             check = true;
         }
-        if(list->type == TOKEN_PIPE)
+        if(list->type == TOKEN_PIPE || list->type == TOKEN_AND)
+            check = false;
+        else if(list->type == TOKEN_OR || list->type == TOKEN_O_PAR)
+            check = false;
+        else if(list->type == TOKEN_C_PAR)
             check = false;
         list = list->next;
     }

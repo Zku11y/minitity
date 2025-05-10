@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Token_and_lex.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/08 19:39:58 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/09 12:38:25 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,24 @@ typedef struct s_nodes
     struct s_nodes *tail;
 }   t_input;
 
+typedef struct s_latest
+{
+    char **args;
+    char **reds;
+    struct s_latest *next;
+    struct s_latest *prev;
+    struct s_latest *tail;
+}   t_short;
+
+typedef struct s_size
+{
+    int nodes;
+    int sub_nodes;
+    int size_cmd;
+    int size_red;
+    char **args;
+    char **reds;
+}   t_size;
 
 t_input *tokenize(char *line);
 void	*ft_calloc(size_t count, size_t size);
@@ -80,5 +98,5 @@ bool check_limit(char *line, int i,  bool *s_quote, bool *d_quote);
 void filter(t_input *list);
 void checker(char *line);
 void seperator(t_input *list);
-
+t_short *transformer(t_input *list);
 #endif
