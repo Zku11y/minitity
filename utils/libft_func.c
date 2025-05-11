@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:47:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/02 17:52:12 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:14:20 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,9 @@ char	*ft_strdup(const char *s1)
 	}
 	str[i] = '\0';
 	return (str);
+}
+char *ft_realloc(char *ptr, const char *new)
+{
+    free(ptr);
+    return(ft_strdup(new));
 }

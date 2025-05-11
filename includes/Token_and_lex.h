@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/04 15:30:05 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/09 12:38:25 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum s_tokens
     TOKEN_WORD,
     TOKEN_OP,
     TOKEN_DELIMITER,
+    TOKEN_RED_APP,
     TOKEN_CMD,
     TOKEN_ARG,
     TOKEN_FILE,
@@ -46,12 +47,31 @@ typedef struct s_nodes
     int index;
     t_token type;
     t_token category;
+    bool red_app;
     char *value;
     struct s_nodes *next;
     struct s_nodes *prev;
     struct s_nodes *tail;
 }   t_input;
 
+typedef struct s_latest
+{
+    char **args;
+    char **reds;
+    struct s_latest *next;
+    struct s_latest *prev;
+    struct s_latest *tail;
+}   t_short;
+
+typedef struct s_size
+{
+    int nodes;
+    int sub_nodes;
+    int size_cmd;
+    int size_red;
+    char **args;
+    char **reds;
+}   t_size;
 
 t_input *tokenize(char *line);
 void	*ft_calloc(size_t count, size_t size);
@@ -73,9 +93,10 @@ int handle_and_or(t_input **list, char *line);
 int handle_par(t_input **list, char *line);
 int handle_quotes(t_input **list, char *line);
 int handle_word(t_input **list, char *line);
-bool check_limit(char *line, int i);
+bool check_limit(char *line, int i,  bool *s_quote, bool *d_quote);
 
 void filter(t_input *list);
 void checker(char *line);
-
+void seperator(t_input *list);
+t_short *transformer(t_input *list);
 #endif

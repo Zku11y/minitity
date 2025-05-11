@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_functions.c                                    :+:      :+:    :+:   */
+/*   lst_functions_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/09 11:34:54 by mdakni           ###   ########.fr       */
+/*   Created: 2025/05/09 12:24:05 by mdakni            #+#    #+#             */
+/*   Updated: 2025/05/09 12:33:28 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Token_and_lex.h"
 
-void	lst_print(t_input *head)
+void	lst_print_2(t_input *head)
 {
 	char	*data;
 	// t_input *og;
@@ -70,10 +70,10 @@ void	lst_print(t_input *head)
 	printf("\033[1;33m %d\033[0m\n", size);
 }
 
-void lst_assign(t_input **new, t_input **lst)
+void lst_assign_2(t_short **new, t_short **lst)
 {
-	t_input	*ptr;
-    t_input *prev;
+	t_short	*ptr;
+    t_short *prev;
 
     prev = NULL;
 	ptr = *lst;
@@ -87,14 +87,15 @@ void lst_assign(t_input **new, t_input **lst)
 	(*lst)->tail = ptr;
 }
 
-void	ft_lstadd_back(t_input **lst, char *content)
+void	ft_lstadd_back_2(t_short **lst, char **args, char **reds)
 {
-    t_input *new;
+    t_short *new;
 
-	new = ft_calloc(sizeof(t_input), 1);
+	new = ft_calloc(sizeof(t_short), 1);
 	if (new == NULL)
 		return ;
-	new->value = content;
+	new->args = args;
+    new->reds = reds;
 	if (!lst || !new)
 		return ;
 	if (!*lst)
@@ -105,7 +106,7 @@ void	ft_lstadd_back(t_input **lst, char *content)
 	lst_assign(&new, lst);
 }
 
-t_input	*ft_lstlast(t_input *lst)
+t_short	*ft_lstlast_2(t_short *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -114,12 +115,23 @@ t_input	*ft_lstlast(t_input *lst)
 	return (lst);
 }
 
-void ft_lstfree(t_input *lst)
+void ft_lstfree_2(t_short *lst)
 {
+    int i;
+    int j;
+    t_short *tmp;
+
 	while(lst)
 	{
-		free(lst->value);
-		t_input *tmp = lst;
+        i = 0;
+        j = 0;
+        tmp = lst;
+        while(lst->args[i])
+            free(lst->args[i++]);
+        while(lst->reds[j])
+            free(lst->reds[j++]);
+		free(lst->args);
+		free(lst->reds);
 		lst = lst->next;
 		free(tmp);
 	}

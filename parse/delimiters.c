@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delimiters.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:41:27 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/04 15:25:04 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/06 17:32:07 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,29 @@ int handle_word_quotes(t_input **list, char *line, bool s_quote, int i)
 int handle_quotes(t_input **list, char *line)
 {
 	int i;
+	bool check;
 
 	i = 0;
-	if(line[0] == '\'')
-	{
-		i++;
-		i = handle_word_quotes(list, line, true, i);
+	check = false;
+	while(line[i] && !is_space(line[i]))
+	{	
+		if(line[i] == '\'')
+		{
+			i++;
+			check = true;
+			i = handle_word_quotes(list, line, true, i);
+		}
+		if(line[i] == '"')
+		{
+			i++;
+			check = true;
+			i = handle_word_quotes(list, line, false, i);
+		}
 	}
-	else if(line[0] == '"')
+	if(check == true)
 	{
-		i++;
-		i = handle_word_quotes(list, line, false, i);
+		ft_lstadd_back(list, ft_strndup(line, i));
+		ft_lstlast(*list)->category = TOKEN_WORD;
 	}
 	return i;
 }
