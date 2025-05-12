@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 15:49:13 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/07 07:44:34 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/12 09:15:49 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ typedef struct s_env
 
 typedef struct s_data
 {
-	t_env	*env;
+	t_env	**env;
 }			t_data;
 
 // tbh idk
 int		b_pwd(t_data *data);
 
 // env
-int		env_add(char *name, char *valve, t_data *data);
-int		env_del(const char *name, t_data *data);
-t_env	*env_init(t_data *data, char **old_env);
-void	env_print(t_data *data);
+int		env_add(char *name, char *valve, t_env **head);
+int		env_del(const char *name, t_env **head);
+t_env	**env_init(char **old_env);
+void	env_print(t_env **head);
 
 bool	start(char **av);
 
