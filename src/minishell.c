@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:16:23 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/11 22:17:54 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/16 18:05:57 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void manager(char *line)
     t_short *shart;
 
     (void)shart;
-    checker(line);
+    // checker(line);
     input = tokenize(line);
+    lst_print(input);
     filter(input);
     seperator(input);
-    lst_print(input);
     printf("\e[1;32mSuccess!\e[0m\n");
-    shart = transformer(input);
+    // shart = transformer(input);
     ft_lstfree(input);
 }
 

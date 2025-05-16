@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:52:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/08 21:35:48 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/16 18:05:13 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,59 +19,58 @@ int skip_spaces(char *line, int i)
 	return i;
 }
 
-bool check_limit(char *line, int i, bool *s_quote, bool *d_quote)
+bool check_limit(char *line, t_quotes *check)
 {
-	if(line[i] == '"' && !(*s_quote))
+	if(line[(check->i)] == '"' && (check->quotes) != 1)
 	{
-		if(*d_quote == true)
-			*d_quote = false;
+		if(check->quotes == 2)
+			check->quotes = 0;
 		else
-			*d_quote = true;
-
+			check->quotes = 2;
 	}
-	if(line[i] == '\'' && !(*d_quote))
+	else if(line[check->i] == '\'' && (check->quotes) != 2)
 	{
-		if(*s_quote == true)
-			*s_quote = false;
+		if(check->quotes == 1)
+			check->quotes = 0;
 		else
-			*s_quote = true;
+			check->quotes = 1;
 	}
-	else if(line[i] == '<' || line[i] == '>')
+	if((check->quotes != 0))
+		return (false);
+	if(line[check->i] == '<' || line[check->i] == '>')
 		return (true);
-	else if(line[i] == '|' || (line[i] == '&' && line[i + 1] == '&'))
+	else if(line[check->i] == '|')
 		return (true);
-	else if(line[i] == '(' || line[i] == ')')
-		return (true);
-	else if(is_space(line[i]) && !(*s_quote) && !(*d_quote))
+	else if(is_space(line[check->i]))
 		return (true);
 	return (false);
 }
 int handle_word(t_input **list, char *line)
 {
-	int i;
-	bool s_quote;
-	bool d_quote;
+	t_quotes check;
 
-	s_quote = false;
-	d_quote = false;
-	i = 0;
-	while(line[i])
+	check.quotes = 0;
+	check.i = 0;
+	while(line[check.i])
 	{
-		if (check_limit(line, i, &s_quote, &d_quote))
+		if (check_limit(line, &check))
 			break;
-		i++;
+		check.i++;
 	}
-	if(i > 0)
+	if(check.i > 0)
 	{
-		ft_lstadd_back(list, ft_strndup(line, i));
+		ft_lstadd_back(list, ft_strndup(line, check.i));
 		ft_lstlast(*list)->category = TOKEN_WORD;
 	}
-	if(!line[i])
+	if(!line[check.i])
 	{
 		ft_lstadd_back(list, NULL);
 		ft_lstlast(*list)->type = TOKEN_EOF;
 	}
-	return i;
+	(*list)->quotes = check.quotes;		
+	if((*list)->quotes != 0)
+		printf("OPEN QUOTE : %d\n", (*list)->quotes);
+	return check.i;
 }
 
 void assign_tokens(t_input **list, char *line)
@@ -83,10 +82,10 @@ void assign_tokens(t_input **list, char *line)
 	{
 		i = skip_spaces(line, i);
 		i += handle_pipe(list, line + i);
-		i += handle_and_or(list, line + i);
+		// i += handle_and_or(list, line + i);
 		i += handle_red(list, line + i);
 		i += handle_app(list, line + i);
-		i += handle_par(list, line + i);
+		// i += handle_par(list, line + i);
 		i += handle_word(list, line + i);
 		// i += handle_quotes(list, line + i);
 	}

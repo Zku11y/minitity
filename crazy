@@ -1,0 +1,16 @@
+total 88
+drwxr-xr-x 9 skully skully  4096 May 16 16:37 .
+drwxr-xr-x 9 skully skully  4096 May  2 01:46 ..
+-rw-r--r-- 1 skully skully     0 May 16 16:37 crazy
+-rw-r--r-- 1 skully skully  6148 May 11 20:00 .DS_Store
+drwxr-xr-x 7 skully skully  4096 May 16 16:30 .git
+-rw-r--r-- 1 skully skully    22 May  2 01:46 .gitignore
+drwxr-xr-x 2 skully skully  4096 May  2 01:46 halocaust
+drwxr-xr-x 2 skully skully  4096 May 11 20:00 includes
+-rw-r--r-- 1 skully skully   563 May 11 20:00 Makefile
+-rwxr-xr-x 1 skully skully 25928 May 16 16:27 minishell
+drwxr-xr-x 2 skully skully  4096 May 16 16:27 parse
+-rw-r--r-- 1 skully skully  6275 May  2 01:46 README.md
+drwxr-xr-x 2 skully skully  4096 May 16 16:27 src
+drwxr-xr-x 2 skully skully  4096 May 16 16:27 utils
+drwxr-xr-x 2 skully skully  4096 May  3 20:32 .vscode

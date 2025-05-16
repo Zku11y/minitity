@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Token_and_lex.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/09 12:38:25 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/16 17:58:09 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef enum s_tokens
 typedef struct s_nodes
 {
     int index;
+    int quotes; // 0 : no problems, 1 : open single quotes, 2 : open double quotes
     t_token type;
     t_token category;
     bool red_app;
@@ -66,12 +67,15 @@ typedef struct s_latest
 typedef struct s_size
 {
     int nodes;
-    int sub_nodes;
     int size_cmd;
     int size_red;
-    char **args;
-    char **reds;
 }   t_size;
+
+typedef struct s_quotes
+{
+    int i;
+    int quotes; // 0 : no problems, 1 : open single quotes, 2 : open double quotes
+}   t_quotes;
 
 t_input *tokenize(char *line);
 void	*ft_calloc(size_t count, size_t size);
@@ -84,6 +88,10 @@ size_t	ft_strlen(const char *s);
 void ft_lstfree(t_input *lst);
 bool is_space(char c);
 void	lst_print(t_input *head);
+void ft_lstfree_2(t_short *lst);
+t_short	*ft_lstlast_2(t_short *lst);
+void	ft_lstadd_back_2(t_short **lst, char **args, char **reds);
+void lst_assign_2(t_short **new, t_short **lst);
 
 
 int handle_pipe(t_input **list, char *line);
@@ -93,7 +101,7 @@ int handle_and_or(t_input **list, char *line);
 int handle_par(t_input **list, char *line);
 int handle_quotes(t_input **list, char *line);
 int handle_word(t_input **list, char *line);
-bool check_limit(char *line, int i,  bool *s_quote, bool *d_quote);
+bool check_limit(char *line, t_quotes *check);
 
 void filter(t_input *list);
 void checker(char *line);

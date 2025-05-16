@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 12:24:05 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/09 12:33:28 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/12 01:14:51 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	ft_lstadd_back_2(t_short **lst, char **args, char **reds)
 		*lst = new;
 		return ;
 	}
-	lst_assign(&new, lst);
+	lst_assign_2(&new, lst);
 }
 
 t_short	*ft_lstlast_2(t_short *lst)

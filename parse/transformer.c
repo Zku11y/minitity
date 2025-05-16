@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:28:07 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/09 13:42:27 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/16 16:18:24 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,30 @@ bool check_reds(t_input *list)
     return tmp;
 }
 
-t_size count_nodes(t_input *list)
+void add_string(t_short *shart, t_input *list, bool args)
 {
-    t_size nodes;
+    // int i;
+    int j;
+    // int k;
 
-    nodes.nodes = 0;
-    nodes.size_cmd = 0;
-    nodes.size_red = 0;
+    // i = 0;
+    j = 0;
+    // k = 0;
+    (void)args;
+    while(list)
+    {
+        if(list->type == TOKEN_CMD || list->type == TOKEN_ARG)
+        {
+            shart->args[j] = ft_strdup(list->value);
+            j++;
+        }
+        list = list->next;
+    }
+}
+
+t_size count_nodes(t_input *list, t_size nodes, t_short *shart)
+{
+    (void)shart;
     while(list)
     {
         if(check_reds(list))
@@ -75,19 +92,31 @@ t_size count_nodes(t_input *list)
     }
     return nodes;
 }
-
+// this function compresses the nodes to smaller pieces easier to transport
 t_short *transformer(t_input *list)
 {
     t_size nodes;
     t_short *shart;
 
-    nodes = count_nodes(list);
-    // nodes.args = ft_calloc(sizeof(char *), nodes.nodes);
-    // nodes.reds = ft_calloc(sizeof(char *), nodes.nodes);
-    // if(nodes.args == NULL)
-    //     return NULL;
-    
-    (void)shart;  
+    nodes.nodes = 0;
+    nodes.size_cmd = 0;
+    nodes.size_red = 0;
+    shart = ft_calloc(sizeof(t_short), 1);
+    nodes = count_nodes(list, nodes, shart);
+    shart->args = ft_calloc(sizeof(char *), nodes.size_cmd);
+    shart->reds = ft_calloc(sizeof(char *), nodes.size_red);
     printf("\n nodes : %d, args : %d, reds : %d\n", nodes.nodes, nodes.size_cmd, nodes.size_red);
+    int i = 0;
+    while(shart->args[i])
+    {
+        printf("%d : %s\n", i, shart->args[i]);
+        i++;
+    }
+    i = 0;
+    while(shart->reds[i])
+    {
+        printf("%d : %s\n", i, shart->reds[i]);
+        i++;
+    }
     return NULL;
 }
