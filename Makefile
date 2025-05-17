@@ -1,12 +1,12 @@
 
 
-
 NAME = run
 
-LIB = libft/*.c
-
 SRC = main.c\
+	libft/*.c
 	m_env/*.c
+	m_sig/*.c
+	m_bul/*.c
 
 all: $(NAME)
 

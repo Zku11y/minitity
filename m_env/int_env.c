@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   int_env.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/17 21:55:17 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/17 21:55:18 by oel-mado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ex.h"
 
 t_env	*int_env(char **env)
 {
-	t_env *hd_env;
-	t_env *nu_env;
-	t_env *tm_env;
-	int i;
-	int j;
+	t_env	*hd_env;
+	t_env	*nu_env;
+	t_env	*tm_env;
+	int		i;
+	int		j;
 
 	nu_env = NULL;
 	i = 0;
@@ -14,7 +26,7 @@ t_env	*int_env(char **env)
 	{
 		j = 0;
 		while (env[i][j] != '=' && env[i][j] != '\0')
-		j++;
+			j++;
 		nu_env = ft_calloc(sizeof(t_env), 1);
 		nu_env->key = ft_strndup(env[i], j);
 		nu_env->value = ft_strdup(&env[i][j + 1]);
