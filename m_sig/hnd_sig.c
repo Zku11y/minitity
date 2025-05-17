@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_pwd.c                                          :+:      :+:    :+:   */
+/*   hnd_sig.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 19:37:43 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/17 19:39:37 by oel-mado         ###   ########.fr       */
+/*   Created: 2025/05/17 19:02:56 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/17 19:10:01 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ex.h"
 
-int	cmd_pwd()
+void	hnd_sig(int signum, siginfo_t *info, void *cnt)
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
+	(void)cnt;
+	(void)info;
+	if (signum == SIGINT)
 	{
-		write(2, "Error: getcwd()", 15);
-		return (1);
+		// if (prompt_msg())
+		// 	write(2, "Error: prompt_msg() dead\n", 7);
+		;;
 	}
-	printf("%s\n", pwd);
-	free(pwd);
-	return (0);
+	else if (signum == SIGQUIT)
+		;;
 }

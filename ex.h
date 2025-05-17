@@ -16,11 +16,20 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+typedef struct s_data
+{
+	int				cum;
+	char			*ni;
+	t_env			env;
+}					t_data;
+
 t_env	*int_env(char **env);
 int		 prn_env(t_env *env);
 int		 fre_env(t_env *env);
 int		 del_env(t_env *env, char *key);
 char	 *gvl_env(t_env *env, char *key);
 int		 add_env(t_env *env, char *key, char *value);
+
+void	hnd_sig(int signum, siginfo_t *info, void *cnt);
 
 #endif //EX_H

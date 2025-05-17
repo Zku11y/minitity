@@ -6,7 +6,7 @@ NAME = run
 LIB = libft/*.c
 
 SRC = main.c\
-	#m_env/
+	m_env/*.c
 
 all: $(NAME)
 
