@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:52:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/16 22:43:59 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/17 13:46:22 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,34 @@ bool check_limit(char *line, t_quotes *check)
 		else
 			check->quotes = 1;
 	}
+	if(check->quotes != 1 && line[check->i] == '$')
+		check->expand = true;
 	if((check->quotes != 0))
 		return (false);
 	if(line[check->i] == '<' || line[check->i] == '>')
 		return (true);
-	else if(line[check->i] == '|')
-		return (true);
-	else if(is_space(line[check->i]))
+	else if(line[check->i] == '|' || is_space(line[check->i]))
 		return (true);
 	return (false);
 }
+void edge_check(char *line, t_quotes check, t_input **list)
+{
+	if(!line[check.i])
+	{
+		ft_lstadd_back(list, NULL);
+		ft_lstlast(*list)->type = TOKEN_EOF;
+	}
+	(*list)->quotes = check.quotes;		
+	if((*list)->quotes != 0)
+		printf("OPEN QUOTE : %d\n", (*list)->quotes);
+}
+
 int handle_word(t_input **list, char *line)
 {
 	t_quotes check;
+	t_input *tmp;
 
+	check.expand = false;
 	check.quotes = 0;
 	check.i = 0;
 	while(line[check.i])
@@ -60,16 +74,11 @@ int handle_word(t_input **list, char *line)
 	if(check.i > 0)
 	{
 		ft_lstadd_back(list, ft_strndup(line, check.i));
-		ft_lstlast(*list)->category = TOKEN_WORD;
+		tmp = ft_lstlast(*list);
+		tmp->category = TOKEN_WORD;
+		tmp->expand = check.expand;
 	}
-	if(!line[check.i])
-	{
-		ft_lstadd_back(list, NULL);
-		ft_lstlast(*list)->type = TOKEN_EOF;
-	}
-	(*list)->quotes = check.quotes;		
-	if((*list)->quotes != 0)
-		printf("OPEN QUOTE : %d\n", (*list)->quotes);
+	edge_check(line, check, list);
 	return check.i;
 }
 

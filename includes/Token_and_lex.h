@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/16 17:58:09 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/17 13:30:18 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_nodes
     t_token type;
     t_token category;
     bool red_app;
+    bool expand;
     char *value;
     struct s_nodes *next;
     struct s_nodes *prev;
@@ -74,7 +75,8 @@ typedef struct s_size
 typedef struct s_quotes
 {
     int i;
-    int quotes; // 0 : no problems, 1 : open single quotes, 2 : open double quotes
+    int quotes;
+    bool expand; // 0 : no problems, 1 : open single quotes, 2 : open double quotes
 }   t_quotes;
 
 t_input *tokenize(char *line);

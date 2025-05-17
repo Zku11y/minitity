@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/09 11:34:54 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/17 13:47:45 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	lst_print(t_input *head)
 				printf("\033[1;34m%s\033[0m", "OR");
 			else if(head->type == TOKEN_EOF)
 				printf("\033[1;34m%s\033[0m", "EOF");
+			if(head->expand)
+				printf("\033[1;31m EXPANDABLE! \033[0m");
 			printf(" : \033[1;36m%s\033[0m", data);
 		}
 		printf("\033[1;37m -> \033[0m");
