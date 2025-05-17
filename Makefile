@@ -1,35 +1,22 @@
-NAME = minishell
 
-SRC = src/minishell.c parse/tokenize.c parse/delimiters.c \
-	  parse/filter.c parse/checker.c parse/lst_functions.c \
-	  parse/operators.c utils/libft_func.c utils/libft_func2.c \
-	  parse/seperator.c parse/transformer.c
 
-OBJ = $(SRC:.c=.o)
 
-CC = cc -Wall -Wextra -Werror
+NAME = run
 
-t:
-	@make all
-	@make clean
-	@echo "\033[1;32mSuccess!\033[0m\n"
-	@clear
-	@./minishell
+LIB = libft/*.c
 
-all:$(NAME)
+SRC = main.c\
+	#m_env/
 
-$(NAME):$(OBJ)
-	$(CC) $(OBJ) -o $(NAME) -lreadline
+all: $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(SRC)
+	@echo "Compiling $(NAME)"
+	@$(CC) $(CFLAGS) -o $(NAME) $(SRC) $(LIB)
+	@echo "$(NAME) compiled successfully"
 
 clean:
-	rm -f $(OBJ)
+	@echo "Cleaning up..."
+	@rm -f $(NAME)
+	@echo "Cleaned up $(NAME)"
 
-fclean: clean
-	rm -f $(NAME)
-
-re: fclean all
-
-.PHONY: clean

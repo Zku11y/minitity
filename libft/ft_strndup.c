@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trai.c                                             :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fd2 <fd2@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 01:12:09 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/04/27 18:19:58 by oel-mado         ###   ########.fr       */
+/*   Created: 2024/10/28 03:07:09 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/16 07:01:41 by fd2              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coll.h"
+#include "libft.h"
 
-void	train(void *vd)
+char	*ft_strndup(const char *s1, size_t n)
 {
-	t_coll	*coll;
+	size_t	ln;
+	char	*s2;
 
-	jews = malloc (sizeof(t_coll));
-	if (!coll)
-		ult();
-	coll->next_coll = NULL;
+	ln = ft_strlen(s1);
+	if (n < ln)
+		ln = n;
+	s2 = ft_calloc(sizeof(char), ln + 1);
+	if (!s2)
+		return (NULL);
+	ft_strlcpy(s2, s1, ln + 1);
+	return (s2);
 }

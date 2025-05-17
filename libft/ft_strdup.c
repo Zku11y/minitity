@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ove.c                                              :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fd2 <fd2@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 00:59:45 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/04/27 01:13:24 by oel-mado         ###   ########.fr       */
+/*   Created: 2024/10/28 03:07:09 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/16 23:29:32 by fd2              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "coll.h"
+#include "libft.h"
 
-void	ove(t_coll *coll)
+char	*ft_strdup(const char *s1)
 {
-	t_coll	*the_coll;
-	t_coll	*tmp_coll;
+	size_t	ln;
+	char	*s2;
 
-	tmp_coll = coll;
-	while (tmp_coll->next_coll)
-	{
-		the_coll = tmp_coll;
-		tmp_coll = tmp_coll->next_coll;
-		free(the_coll->coll);
-	}
+	ln = ft_strlen(s1) + 1;
+	s2 = ft_calloc(sizeof(char), ln);
+	if (!s2)
+		return (NULL);
+	ft_strlcpy(s2, s1, ln);
+	return (s2);
 }

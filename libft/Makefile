@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+         #
+#    By: fd2 <fd2@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 17:00:38 by oel-mado          #+#    #+#              #
-#    Updated: 2024/11/15 16:31:29 by oel-mado         ###   ########.fr        #
+#    Updated: 2025/05/16 07:04:06 by fd2              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = ft_atoi.c\
 	ft_split.c\
 	ft_strchr.c\
 	ft_strdup.c\
+	ft_strndup.c\
 	ft_striteri.c\
 	ft_strjoin.c\
 	ft_strlcat.c\
@@ -50,8 +51,7 @@ SRC = ft_atoi.c\
 	ft_substr.c\
 	ft_tolower.c\
 	ft_toupper.c
-
-SRCB = ft_lstnew_bonus.c\
+	ft_lstnew_bonus.c\
 	ft_lstadd_front_bonus.c\
 	ft_lstadd_back_bonus.c\
 	ft_lstsize_bonus.c\
@@ -63,25 +63,20 @@ SRCB = ft_lstnew_bonus.c\
 
 OBJ = ${SRC:.c=.o}
 
-OBJB = ${SRCB:.c=.o}
-
 all: ${NAME}
 
 ${NAME}: ${OBJ}
 	ar rcs ${NAME} ${OBJ}
 
-bonus: ${OBJB}
-	ar rcs ${NAME} ${OBJB}
-
 %.o: %.c libft.h
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	rm -f ${OBJ} ${OBJB}
+	rm -f ${OBJ}
 
 fclean: clean
 	rm -f ${NAME}
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re

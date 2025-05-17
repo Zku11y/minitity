@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fd2 <fd2@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 16:12:07 by oel-mado          #+#    #+#             */
-/*   Updated: 2024/11/14 22:56:07 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/16 07:02:02 by fd2              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
 
 char		*ft_strdup(const char *s1);
+char		*ft_strndup(const char *s1, size_t n);
 char		**ft_split(char const *s, char c);
 void		*ft_calloc(size_t count, size_t size);
 
