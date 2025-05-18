@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:47:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/07 16:14:20 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/18 14:20:21 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if(!s)
+		return(0);
 	while (s[i])
 		i++;
 	return (i);

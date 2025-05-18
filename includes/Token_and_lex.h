@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Token_and_lex.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/17 13:30:18 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/18 19:25:53 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <signal.h>
+
+
 // Tokens used to categorise each word in the input string.
 // R : right, L : left, S : single, D : double, O : opened, C : closed.
 typedef enum s_tokens
 {
     TOKEN_WORD,
     TOKEN_OP,
-    TOKEN_DELIMITER,
     TOKEN_RED_APP,
+    TOKEN_DELIMITER,
     TOKEN_CMD,
     TOKEN_ARG,
     TOKEN_FILE,
@@ -46,6 +49,7 @@ typedef struct s_nodes
 {
     int index;
     int quotes; // 0 : no problems, 1 : open single quotes, 2 : open double quotes
+    int strip;
     t_token type;
     t_token category;
     bool red_app;
@@ -59,7 +63,7 @@ typedef struct s_nodes
 typedef struct s_latest
 {
     char **args;
-    char **reds;
+    char **reds; // ls -la | grep 'x' > outfile  -------- args == [ls] [la]
     struct s_latest *next;
     struct s_latest *prev;
     struct s_latest *tail;
@@ -76,8 +80,19 @@ typedef struct s_quotes
 {
     int i;
     int quotes;
-    bool expand; // 0 : no problems, 1 : open single quotes, 2 : open double quotes
+    int remove; // 0 : no problems, 1 : open single quotes, 2 : open double quotes
+    bool expand;
 }   t_quotes;
+
+typedef struct s_flags
+{
+    char *string;
+    bool changed;
+    bool flag_s;
+    bool flag_d;
+    int start;
+    int i;
+} t_flags;
 
 t_input *tokenize(char *line);
 void	*ft_calloc(size_t count, size_t size);
@@ -90,23 +105,26 @@ size_t	ft_strlen(const char *s);
 void ft_lstfree(t_input *lst);
 bool is_space(char c);
 void	lst_print(t_input *head);
+int prompt_msg();
 void ft_lstfree_2(t_short *lst);
 t_short	*ft_lstlast_2(t_short *lst);
 void	ft_lstadd_back_2(t_short **lst, char **args, char **reds);
 void lst_assign_2(t_short **new, t_short **lst);
-
-
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strnjoin(char *s1, char *s2, int n);
+int	ft_isalpha(int c);
+int	ft_isalnum(int c);
 int handle_pipe(t_input **list, char *line);
 int handle_red(t_input **list, char *line);
 int handle_app(t_input **list, char *line);
-int handle_and_or(t_input **list, char *line);
-int handle_par(t_input **list, char *line);
 int handle_quotes(t_input **list, char *line);
 int handle_word(t_input **list, char *line);
 bool check_limit(char *line, t_quotes *check);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 void filter(t_input *list);
 void checker(char *line);
 void seperator(t_input *list);
 t_short *transformer(t_input *list);
+void striper(t_input *list);
 #endif

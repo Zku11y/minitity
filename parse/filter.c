@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:37:25 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/16 23:00:40 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/18 15:08:11 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ void syntax_error(t_token type, t_input *list, t_input *iter)
         else
             printf("Syntax Error near unexpected Token '%s' \n", iter->next->value);
     }
-    if(type == TOKEN_AND)
-        printf("Syntax Error near unexpected Token '&&' \n");
-    if(type == TOKEN_OR)
-        printf("Syntax Error near unexpected Token '||' \n");
     ft_lstfree(list);
     exit(EXIT_FAILURE);
 }
@@ -46,7 +42,7 @@ void filter(t_input *list)
     iter = list;
     while(iter)
     {
-        if(list->type == TOKEN_PIPE && list->next->type == TOKEN_PIPE)
+        if(iter->type == TOKEN_PIPE && iter->next->type == TOKEN_PIPE)
             return(syntax_error(TOKEN_PIPE, list, iter));
         if((iter->type == TOKEN_R_RED || iter->type == TOKEN_L_RED) && !(iter->next->value))
             return(printf("3 : %d\n", iter->index) ,syntax_error(iter->type, list, iter));
@@ -57,5 +53,13 @@ void filter(t_input *list)
         if(iter->category == TOKEN_RED_APP && iter->next->category != TOKEN_WORD)
             return(printf("5 : %d\n", iter->index) ,syntax_error(iter->type, list, iter));
         iter = iter->next;
+    }
+    if(list->quotes != 0)
+    {
+        if(list->quotes == 1)
+            printf("Open Single Quote Error\n");
+        if(list->quotes == 2)
+            printf("Open Double Quote Error\n");
+        return(ft_lstfree(list), exit(EXIT_FAILURE));
     }
 }

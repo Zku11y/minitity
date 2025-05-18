@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operators.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:41:24 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/16 22:43:46 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/18 15:06:30 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int handle_pipe(t_input **list, char *line)
 {
 	t_input *tmp;
 
-	if(line[0] == '|' && line[1] != '|')
+	if(line[0] == '|')
 	{
 		ft_lstadd_back(list, ft_strdup("|"));
 		tmp = ft_lstlast(*list);

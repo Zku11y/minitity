@@ -3,18 +3,16 @@ NAME = minishell
 SRC = src/minishell.c parse/tokenize.c parse/delimiters.c \
 	  parse/filter.c parse/checker.c parse/lst_functions.c \
 	  parse/operators.c utils/libft_func.c utils/libft_func2.c \
-	  parse/seperator.c parse/transformer.c
+	  parse/seperator.c parse/transformer.c parse/striper.c
 
 OBJ = $(SRC:.c=.o)
 
 CC = cc -Wall -Wextra -Werror
 
 t:
-	@make all
+	@make re
 	@make clean
-	@echo "\033[1;32mSuccess!\033[0m\n"
 	@clear
-	@./minishell
 
 all:$(NAME)
 

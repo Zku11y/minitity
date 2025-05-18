@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 16:52:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/17 13:46:22 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/17 20:35:34 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ int skip_spaces(char *line, int i)
 	while(is_space(line[i]) && line[i])
 		i++;
 	return i;
+}
+
+void check_additionals(char *line, t_quotes *check)
+{
+	if(check->quotes != 1 && line[check->i] == '$')
+	{
+		check->expand = true;
+		check->remove = check->quotes;
+	}
 }
 
 bool check_limit(char *line, t_quotes *check)
@@ -35,8 +44,7 @@ bool check_limit(char *line, t_quotes *check)
 		else
 			check->quotes = 1;
 	}
-	if(check->quotes != 1 && line[check->i] == '$')
-		check->expand = true;
+	check_additionals(line, check);
 	if((check->quotes != 0))
 		return (false);
 	if(line[check->i] == '<' || line[check->i] == '>')
@@ -53,8 +61,8 @@ void edge_check(char *line, t_quotes check, t_input **list)
 		ft_lstlast(*list)->type = TOKEN_EOF;
 	}
 	(*list)->quotes = check.quotes;		
-	if((*list)->quotes != 0)
-		printf("OPEN QUOTE : %d\n", (*list)->quotes);
+	// if((*list)->quotes != 0)
+	// 	printf("OPEN QUOTE : %d\n", (*list)->quotes);
 }
 
 int handle_word(t_input **list, char *line)
@@ -63,6 +71,7 @@ int handle_word(t_input **list, char *line)
 	t_input *tmp;
 
 	check.expand = false;
+	check.remove = 0;
 	check.quotes = 0;
 	check.i = 0;
 	while(line[check.i])
@@ -77,6 +86,7 @@ int handle_word(t_input **list, char *line)
 		tmp = ft_lstlast(*list);
 		tmp->category = TOKEN_WORD;
 		tmp->expand = check.expand;
+		tmp->strip = check.remove;
 	}
 	edge_check(line, check, list);
 	return check.i;
