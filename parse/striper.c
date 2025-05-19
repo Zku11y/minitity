@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   striper.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:15:41 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/18 22:33:38 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/19 16:26:50 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ void handle_CA$H(t_input *list, t_flags *check)
     string_app(list, check, false);
     check->i += 2;
     check->start = check->i;
+    if(!ft_isalpha(list->value[check->i]) && list->value[check->i] != '_')
+    {
+        check->string = ft_strnjoin(check->string, "$", 1);
+        check->start = check->i--;
+        return;
+    }
     while(ft_isalnum(list->value[check->i]) || list->value[check->i] == '_')
         check->i++;
     tmp = ft_substr(list->value, check->start, (check->i) - check->start);

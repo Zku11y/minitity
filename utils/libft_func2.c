@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_func2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:59:49 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/18 20:24:44 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/19 16:27:31 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,12 @@ char	*ft_strnjoin(char *s1, char *s2, int n)
 	// 	return (s1);
 	str = malloc((ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (str == NULL)
-		return (NULL);
+	return (NULL);
 	while (s1 && s1[i])
-		str[j++] = (char)s1[i++];
+	str[j++] = (char)s1[i++];
 	i = 0;
 	while (s2 && n >= 0 && s2[i] && i <= n)
-		str[j++] = (char)s2[i++];
+	str[j++] = (char)s2[i++];
 	str[j] = '\0';
 	return (str);
 }
