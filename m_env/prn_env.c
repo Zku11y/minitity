@@ -6,11 +6,11 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:55:21 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/17 21:55:53 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:04:02 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ex.h"
+#include "ex.h"
 
 int	prn_env(t_env *env)
 {

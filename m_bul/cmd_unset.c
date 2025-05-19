@@ -6,11 +6,11 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:48:51 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/17 21:50:01 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:44:13 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ex.h"
+#include "bul_cmd.h"
 
 int	cmd_unset(t_env *env, char *key)
 {

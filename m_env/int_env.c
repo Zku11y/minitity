@@ -6,11 +6,11 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:55:17 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/17 21:55:18 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:03:59 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ex.h"
+#include "ex.h"
 
 t_env	*int_env(char **env)
 {

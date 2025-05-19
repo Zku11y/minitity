@@ -6,19 +6,19 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:50:36 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/17 21:51:26 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:03:36 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ex.h"
+#include "ex.h"
 
-int	add_env(t_env *env, char *key, char *value)
+t_env	*add_env(t_env *env, char *key, char *value)
 {
 	int	l;
 
 	t_env (*nu_env), (*tm_env);
 	if (key == NULL || env == NULL)
-		return (1);
+		return (NULL);
 	tm_env = env;
 	l = ft_strlen(key);
 	while (tm_env != NULL)
@@ -27,7 +27,7 @@ int	add_env(t_env *env, char *key, char *value)
 		{
 			free(tm_env->value);
 			tm_env->value = ft_strdup(value);
-			return (0);
+			return (tm_env);
 		}
 		if (tm_env->next == NULL)
 			break;
@@ -38,5 +38,5 @@ int	add_env(t_env *env, char *key, char *value)
 	nu_env->value = ft_strdup(value);
 	nu_env->next = NULL;
 	tm_env->next = nu_env;
-	return (0);
+	return (nu_env);
 }

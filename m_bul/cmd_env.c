@@ -6,11 +6,11 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:17:29 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/17 21:49:11 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:43:59 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ex.h"
+#include "bul_cmd.h"
 
 int	cmd_env(t_env *env)
 {
