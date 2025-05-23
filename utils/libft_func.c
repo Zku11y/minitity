@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:47:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/18 14:20:21 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/23 20:47:09 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	str = malloc(ft_strlen(s1) + 1);
-	getenv("PWD");
 	if (str == NULL)
 		return (NULL);
 	i = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:16:23 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/18 19:03:27 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/23 22:56:59 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void manager(char *line)
     input = tokenize(line);
     filter(input);
     seperator(input);
-    striper(input);
+    input = striper(input);
     lst_print(input);
     // printf("\e[1;32mCums!\e[0m\n");
     // shart = transformer(input);

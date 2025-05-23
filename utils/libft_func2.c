@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:59:49 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/19 16:27:31 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/23 20:47:13 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*ft_strnjoin(char *s1, char *s2, int n)
 	while (s2 && n >= 0 && s2[i] && i <= n)
 	str[j++] = (char)s2[i++];
 	str[j] = '\0';
-	return (str);
+	return (free(s1) ,str);
 }
 
 int	ft_isdigit(int c)

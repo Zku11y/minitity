@@ -6,217 +6,299 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:15:41 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/19 16:26:50 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/23 23:11:32 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Token_and_lex.h"
 
-void string_app(t_input *list, t_flags *check, bool flag)
-{
-    char *tmp;
-    tmp = check->string;
-    if(flag)
-    {
-        check->string = ft_strnjoin(check->string, list->value + check->start, (check->i - 1) - check->start);
-        check->start = check->i + 1;
-    }
-    else
-        check->string = ft_strnjoin(check->string, list->value + check->start, (check->i) - check->start);
-    free(tmp);
-}
+// // char *append_string(t_input *list, t_flags *check, bool dollar)
+// // {
+// //     if(dollar)
+// //     {
 
-void handle_CA$H(t_input *list, t_flags *check)
+// //     }
+// //     else
+// //     {
+// //         ft_strnjoin()
+// //     }
+// // }
+
+// void insert_node(t_input *list, t_flags *check)
+// {
+//     t_input *tmp;
+//     char *tmp2;
+
+//     if(list->prev)
+//     {
+//         // printf("problem here......\n");
+//         list->prev->next = NULL;
+//         ft_lstadd_back(&(list->prev), check->string);
+//         list->prev->next->next = list;
+//     }
+//     else
+//     {
+//         tmp = list->next;
+//         list->next = NULL;
+//         ft_lstadd_back(&list, check->string);
+//         list->next->next = tmp;
+//         tmp2 = list->value;
+//         list->value = list->next->value;
+//         list->next->value = tmp2;
+//     }
+// }
+
+// void add_to_list(t_input *list, t_flags *check, char *var)
+// {
+//     if(!var)
+//         return;
+//     while(var[check->d_end])
+//     {
+//         if(is_space(var[check->d_end]))
+//         {
+//             check->expand = ft_substr(var, check->d_start, check->d_end - check->d_start);
+//             printf("str : %s, %d to %d => %s<-\n", check->string, check->d_start,check->d_end, check->expand);
+//             check->string = ft_strnjoin(check->string, check->expand, ft_strlen(check->expand));
+//             free(check->expand);
+//             insert_node(list, check);
+//             check->string = NULL;
+//             while(is_space(var[check->d_end]) && var[check->d_end])
+//                 check->d_end++;
+//             check->d_start = check->d_end;
+//         }
+//         // printf("we reached the end, heres the final addition : ->%s<-\n", check->string);
+//         check->d_end++;
+//     }
+//     if(var[check->d_end] == '\0')
+//     {
+//         check->expand = ft_substr(var, check->d_start, check->d_end - check->d_start);
+//         check->string = ft_strnjoin(check->string, check->expand, ft_strlen(check->expand));
+//         return(free(check->expand));
+//     }
+// }
+
+// void create_and_append(t_input *list, t_flags *check)
+// {
+//     // append what was previously read from outside $, then read inside dollar until spaces then create new node with read string
+//     char *tmp;
+//     char *tmp2;
+
+//     check->string = ft_strnjoin(check->string, list->value + check->start, (check->end - 1) - check->start);
+//     check->end++;
+//     check->start = check->end;
+//     if(!ft_isalpha(list->value[check->end]) && list->value[check->end] != '_')
+//     {
+//         check->string = ft_strnjoin(check->string, "$", 1);
+//         return;
+//     }
+//     while(ft_isalnum(list->value[check->end]) || list->value[check->end] == '_')
+//         check->end++;
+//     tmp = ft_substr(list->value, check->start, (check->end) - check->start);
+//     tmp2 = getenv(tmp);
+//     free(tmp);
+//     check->start = check->end;
+//     add_to_list(list, check, tmp2);
+//     // free(tmp2);
+// }
+
+void expand_and_append(t_input *list, t_flags *check)
 {
+    //append what was previously read from outside $, then read until finishing $ then append what was read, then continue reading and appending
     char *tmp;
     char *tmp2;
+    char *tmp3;
 
-    check->changed = true;
-    check->i--;
-    string_app(list, check, false);
-    check->i += 2;
-    check->start = check->i;
-    if(!ft_isalpha(list->value[check->i]) && list->value[check->i] != '_')
+    check->string = ft_strnjoin(check->string, list->value + check->start, (check->end - 1) - check->start);
+    check->end++;
+    check->start = check->end;
+    if(!ft_isalpha(list->value[check->end]) && list->value[check->end] != '_')
     {
         check->string = ft_strnjoin(check->string, "$", 1);
-        check->start = check->i--;
         return;
     }
-    while(ft_isalnum(list->value[check->i]) || list->value[check->i] == '_')
-        check->i++;
-    tmp = ft_substr(list->value, check->start, (check->i) - check->start);
-    printf("\nsubstr : %s\n", tmp);
-    tmp2 = getenv(tmp);
+    while(ft_isalnum(list->value[check->end]) || list->value[check->end] == '_')
+        check->end++;
+    tmp = ft_substr(list->value, check->start, (check->end) - check->start);
+    check->start = check->end;
+    tmp3 = getenv(tmp);
+    if(!tmp3)
+        return;
+    tmp2 = ft_strdup(tmp3);
+    // free(tmp);
     check->string = ft_strnjoin(check->string, tmp2, ft_strlen(tmp2));
-    check->start = check->i;
-    check->i--;
-    free(tmp);
     // free(tmp2);
 }
 
 void node_check(t_input *list, t_flags *check)
 {
-    if(list->value[check->i] == '"' && !check->flag_s)
+    if(list->value[check->end] == '"' && check->quotes != 1)
     {
-        if(check->flag_d)
-            check->flag_d = false;
+        if(check->quotes == 2)
+            check->quotes = 0;
         else
-            check->flag_d = true;
-        check->changed = true;
-        string_app(list, check, true);
+            check->quotes = 2;
     }
-    else if(list->value[check->i] == '\'' && !check->flag_d)
+    else if(list->value[check->end] == '\'' && check->quotes != 2)
     {
-        if(check->flag_s)
-            check->flag_s = false;
+        if(check->quotes == 1)
+            check->quotes = 0;
         else
-            check->flag_s = true;
-        check->changed = true;
-        string_app(list, check, true);
+            check->quotes = 1;
     }
-    else if(list->value[check->i] == '$' && !check->flag_s)
-    {
-        handle_CA$H(list, check);
-    }
-    else if(list->value[check->i + 1] == '\0')
-        string_app(list, check, false);
+    if(list->value[check->end] == '$' && check->quotes != 1)
+        expand_and_append(list, check);
+    else
+        check->end++;
+    if(list->value[check->end] == '\0')
+        check->string = ft_strnjoin(check->string, list->value + check->start, (check->end - 1) - check->start);
 }
+
 void node_mod(t_input *list)
 {
     t_flags check;
 
-    check.changed = false;
-    check.flag_d = false;
-    check.flag_s = false;
     check.string = NULL;
+    check.expand = NULL;
     check.start = 0;
-    check.i = 0;
-    while(list->value[check.i])
-    {
+    check.end = 0;
+    check.d_end = 0;
+    check.d_start = 0;
+    check.quotes = 0;
+    while(list->value[check.end])
         node_check(list, &check);
-        check.i++;
-    }
-    if(check.changed == true)
-        list->value = check.string;
+    // free(list->value);
+    list->value = check.string;
 }
 
-void striper(t_input *list)
+t_input *split_and_add(t_input **list, t_input **iter)
 {
-    while(list->value)
+    char **tmp;
+    t_input *lst_tmp;
+    int i;
+
+    lst_tmp = NULL;
+    i = 0;
+    tmp = ft_split((*iter)->value);
+    if(!tmp || tmp[1] == NULL)
+        return(*list);
+    while(tmp[i])
     {
-        if(list->type == TOKEN_L_APP)
+        ft_lstadd_back(&lst_tmp, tmp[i]);
+        i++;
+    }
+    if((*iter) != *list)
+        (*iter)->prev->next = lst_tmp;
+    else
+        *list = lst_tmp;
+    lst_tmp = ft_lstlast(lst_tmp);
+    lst_tmp->next = (*iter)->next;
+    (*iter) = lst_tmp;
+    return (*list);
+}
+
+t_input *striper(t_input *list)
+{
+    t_input *iter;
+
+    iter = list;
+    while(iter->value)
+    {
+        if(iter->type == TOKEN_L_APP)
         {
-            list = list->next->next;
+            iter = iter->next->next;
             continue;
         }
-        // printf("im nigger!\n");
-        node_mod(list);
-        list = list->next;
+        node_mod(iter);
+        list = split_and_add(&list, &iter);
+        iter = iter->next;
     }
+    return(list);
 }
-
-
-
-// void check_quotes(char *line, t_quotes *check)
+// void string_app(t_input *list, t_flags *check, bool flag)
 // {
-// 	if(line[(check->i)] == '"' && (check->quotes) != 1)
-// 	{
-// 		if(check->quotes == 2)
-// 			check->quotes = 0;
-// 		else
-// 			check->quotes = 2;
-// 	}
-// 	else if(line[check->i] == '\'' && (check->quotes) != 2)
-// 	{
-// 		if(check->quotes == 1)
-// 			check->quotes = 0;
-// 		else
-// 			check->quotes = 1;
-// 	}
+//     char *tmp;
+//     tmp = check->string;
+//     if(flag)
+//     {
+//         check->string = ft_strnjoin(check->string, list->value + check->start, (check->i - 1) - check->start);
+//         check->start = check->i + 1;
+//     }
+//     else
+//         check->string = ft_strnjoin(check->string, list->value + check->start, (check->i) - check->start);
+//     free(tmp);
 // }
-// char  *handle_expansion(t_input *list, t_quotes *check, char *striped, int *prev)
-// {
-//     int j;
-//     char *tmp1;
 
-//     j = 0;
+// void handle_CA$H(t_input *list, t_flags *check)
+// {
+//     char *tmp;
+//     char *tmp2;
+
+//     check->changed = true;
+//     check->i--;
+//     string_app(list, check, false);
+//     check->i += 2;
+//     check->start = check->i;
 //     if(!ft_isalpha(list->value[check->i]) && list->value[check->i] != '_')
 //     {
-//         check->i++;
-//         return("");
+//         check->string = ft_strnjoin(check->string, "$", 1);
+//         check->start = check->i--;
+//         return;
 //     }
-//     while((ft_isalnum(list->value[check->i]) || list->value[check->i] == '_') && list->value[check->i])
+//     while(ft_isalnum(list->value[check->i]) || list->value[check->i] == '_')
 //         check->i++;
-//     *prev = check->i;
-//     tmp1 = ft_strndup(list->value + *prev, check->i - 1);
-//     striped = ft_strjoin(striped, getenv(tmp1));
-//     free(tmp1);
-//     return striped;
+//     tmp = ft_substr(list->value, check->start, (check->i) - check->start);
+//     printf("\nsubstr : %s\n", tmp);
+//     tmp2 = getenv(tmp);
+//     check->string = ft_strnjoin(check->string, tmp2, ft_strlen(tmp2));
+//     check->start = check->i;
+//     check->i--;
+//     free(tmp);
+//     // free(tmp2);
 // }
-// char *ft_replace(t_input *list, t_quotes *check, char *striped, int *prev)
-// {
-//     char c;
 
-//     striped = ft_strnjoin(striped, list->value + *prev, check->i - 1);
-//     c = list->value[check->i];
-//     check->i++;
-//     *prev = check->i;
-//     if(list->value[check->i] == '$' && check->quotes != 1 && list->value[check->i])
-//         striped =  handle_expansion(list, check, striped, prev);
-//     return striped;
+// void node_check(t_input *list, t_flags *check)
+// {
+//     if(list->value[check->i] == '"' && !check->flag_s)
+//     {
+//         if(check->flag_d)
+//             check->flag_d = false;
+//         else
+//             check->flag_d = true;
+//         check->changed = true;
+//         string_app(list, check, true);
+//     }
+//     else if(list->value[check->i] == '\'' && !check->flag_d)
+//     {
+//         if(check->flag_s)
+//             check->flag_s = false;
+//         else
+//             check->flag_s = true;
+//         check->changed = true;
+//         string_app(list, check, true);
+//     }
+//     if(list->value[check->i] == '$' && !check->flag_s)
+//     {
+//         handle_CA$H(list, check);
+//     }
+//     else if(list->value[check->i + 1] == '\0')
+//         string_app(list, check, false);
 // }
-//     // else if(c == '"' || c == '\'')
-//     // {
-//     //     while(list->value[check->i] != c && list->value[check->i])
-//     //         check->i++;
-//     //     striped = ft_strnjoin(striped, list + prev, check->i - 1);
-//     //     check->i++;
-//     // }
-
-// void remove_stuff(t_input *list)
+// void node_mod(t_input *list)
 // {
-//     t_quotes check;
-//     char *striped;
-//     char c;
-//     int prev;
-//     int change;
+//     t_flags check;
 
-//     prev = 0;
-//     change = 0;
+//     check.changed = false;
+//     check.flag_d = false;
+//     check.flag_s = false;
+//     check.string = NULL;
+//     check.start = 0;
 //     check.i = 0;
-//     striped = NULL;
-//     check.quotes = 0;
 //     while(list->value[check.i])
 //     {
-//         printf("in the while loop...\n");
-//         check_quotes(list->value, &check);
-//         if((list->value[check.i] == '$' && check.quotes != 1) || list->value[check.i] == '"' || list->value[check.i] == '\'')
-//         {
-//             change = 1;
-//             if(list->value[check.i] == '$' && check.quotes != 1)
-//                 striped =  handle_expansion(list, &check, striped, &prev);
-//             else
-//             {
-//                 striped = ft_strnjoin(striped, list->value + prev, check.i - 1);
-//                 c = list->value[check.i];
-//                 check.i++;
-//                 prev = check.i;
-//             }
-//             printf("in the if statement..., : ->%s<-\n", striped);
-//         }
+//         node_check(list, &check);
 //         check.i++;
 //     }
-//     if(change)
-//         list->value = striped;
+//     if(check.changed == true)
+//         list->value = check.string;
 // }
-//             // striped = ft_replace(list, &check, striped, &prev);
 
-// void striper(t_input *list)
-// {
-//     while(list->value)
-//     {
-//         printf("im here!, : ->%s<-\n", list->value);
-//         remove_stuff(list);
-//         list = list->next;
-//     }
-// }

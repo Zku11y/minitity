@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Token_and_lex.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/18 19:25:53 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/23 22:56:51 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,12 @@ typedef struct s_quotes
 typedef struct s_flags
 {
     char *string;
-    bool changed;
-    bool flag_s;
-    bool flag_d;
+    char *expand;
+    int quotes;
     int start;
-    int i;
+    int end;
+    int d_start;
+    int d_end;
 } t_flags;
 
 t_input *tokenize(char *line);
@@ -126,5 +127,6 @@ void filter(t_input *list);
 void checker(char *line);
 void seperator(t_input *list);
 t_short *transformer(t_input *list);
-void striper(t_input *list);
+t_input *striper(t_input *list);
+char	**ft_split(char const *s);
 #endif
