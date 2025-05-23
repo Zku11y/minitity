@@ -6,11 +6,11 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:54:01 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/19 17:03:54 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/23 05:25:29 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ex.h"
+#include "env.h"
 
 t_env	*grp_env(t_env *env, char *key)
 {

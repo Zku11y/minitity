@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prn_env.c                                          :+:      :+:    :+:   */
+/*   dog.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 21:55:21 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/23 06:56:43 by oel-mado         ###   ########.fr       */
+/*   Created: 2025/05/23 05:21:57 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/23 05:22:47 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#ifndef DOG_H
+#define DOG_H
 
-int	prn_env(t_env *env)
-{
-	t_env	*n_env;
+#include "../m_exec.h"
 
-	n_env = env;
-	if (env == NULL)
-	{
-		printf("Error\n");
-		return (1);
-	}
-	else
-	{
-		while (n_env != NULL)
-		{
-			if (n_env->ported)
-				printf("%s=%s\n", n_env->key, n_env->value);
-			n_env = n_env->next;
-		}
-	}
-	return (0);
-}
+#endif // DOG_H

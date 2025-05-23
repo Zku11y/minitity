@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prn_env.c                                          :+:      :+:    :+:   */
+/*   m_exec.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 21:55:21 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/23 06:56:43 by oel-mado         ###   ########.fr       */
+/*   Created: 2025/05/23 05:18:51 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/23 05:28:47 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#ifndef M_EXEC_H
+#define M_EXEC_H
 
-int	prn_env(t_env *env)
+#include <stdbool.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <signal.h>
+#include <stdio.h>
+
+#include "libft/libft.h"
+#include "m_bul/bul_cmd.h"
+#include "m_env/env.h"
+
+typedef struct s_data
 {
-	t_env	*n_env;
+	int				fd;
+	int				ex;
+	t_env			env;
+}					t_data;
 
-	n_env = env;
-	if (env == NULL)
-	{
-		printf("Error\n");
-		return (1);
-	}
-	else
-	{
-		while (n_env != NULL)
-		{
-			if (n_env->ported)
-				printf("%s=%s\n", n_env->key, n_env->value);
-			n_env = n_env->next;
-		}
-	}
-	return (0);
-}
+void	hnd_sig(int signum, siginfo_t *info, void *cnt);
+
+#endif // M_EXEC_H

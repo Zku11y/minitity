@@ -6,14 +6,14 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:31:29 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/19 16:43:00 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/23 05:21:23 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUL_CMD_H
 #define BUL_CMD_H
 
-#include "../ex.h"
+#include "../m_exec.h"
 
 typedef struct s_ex
 {

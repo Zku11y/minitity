@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "bul_cmd.h": "c"
+        "bul_cmd.h": "c",
+        "m_exec.h": "c",
+        "env.h": "c"
     }
 }

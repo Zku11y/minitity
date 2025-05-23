@@ -6,20 +6,18 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:55:17 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/19 17:03:59 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/23 05:31:04 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ex.h"
+#include "env.h"
 
 t_env	*int_env(char **env)
 {
-	t_env	*hd_env;
-	t_env	*nu_env;
-	t_env	*tm_env;
 	int		i;
 	int		j;
 
+	t_env (*hd_env), (*nu_env), (*tm_env);
 	nu_env = NULL;
 	i = 0;
 	while(env[i])
@@ -30,6 +28,7 @@ t_env	*int_env(char **env)
 		nu_env = ft_calloc(sizeof(t_env), 1);
 		nu_env->key = ft_strndup(env[i], j);
 		nu_env->value = ft_strdup(&env[i][j + 1]);
+		nu_env->ported = 1;
 		nu_env->next = NULL;
 		if (i == 0)
 			hd_env = nu_env;
