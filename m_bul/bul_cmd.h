@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 16:31:29 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/23 05:21:23 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:53:09 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_ex
 
 int	cmd_export(t_env *env, char *key, char *value);
 int	cmd_unset(t_env *env, char *key);
-int	cmd_echo(t_env *env, int nl, char **arg);
+int	cmd_echo(t_data *data, int nl, char **arg);
 int	cmd_env(t_env *env);
 int	cmd_pwd();
 

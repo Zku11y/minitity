@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 16:17:57 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/19 16:44:05 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:56:55 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	cmd_export(t_env *env, char *key, char *value)
 		write(2, "Error: env is NULL\n", 19);
 		return (1);
 	}
-	if (add_env(env, key, value))
+	if (add_env(env, key, value, 1))
 	{
 		write(2, "Error: add_env failed\n", 21);
 		return (1);
