@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   gky_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 16:17:29 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/25 08:21:58 by oel-mado         ###   ########.fr       */
+/*   Created: 2025/05/25 08:38:32 by oel-mado          #+#    #+#             */
+/*   Updated: 2025/05/25 08:41:07 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bul_cmd.h"
+#include "env.h"
 
-int	cmd_env(t_data *data)
+char	*gky_env(t_env *env, char *key)
 {
-	if (!data || !(data->env))
-	{
-		write(2, "Error: env is NULL\n", 19);
-		return (1);
-	}
-	prn_env(data);
-	return (0);
+	t_env	*n_env;
+
+	n_env = grp_env(env, key);
+	return (n_env->value);
 }

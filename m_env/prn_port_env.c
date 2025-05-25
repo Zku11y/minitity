@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:55:21 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/24 17:19:05 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/25 06:54:52 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,26 @@ t_env	*srt_env(t_env *env)
 	return (n_env);
 }
 
-int	prn_port_env(t_env *env)
+int	prn_port_env(t_data *data)
 {
 	t_env	*n_env;
 
-	n_env = srt_env(env);
-	if (env == NULL)
+	n_env = srt_env(data->env);
+	if (n_env == NULL)
 	{
-		printf("Error\n");
+		write(2, "Error: prn_port_env\n", 20);
 		return (1);
 	}
 	else
 	{
 		while (n_env != NULL)
 		{
-			printf("declare -x %s=\"%s\"\n", n_env->key, n_env->value);
+			ft_putstr_fd("declare -x ", data->fd);
+			ft_putstr_fd(n_env->key, data->fd);
+			ft_putstr_fd("=\"", data->fd);
+			if (n_env->value)
+				ft_putstr_fd(n_env->value, data->fd);
+			ft_putstr_fd("\"\n", data->fd);
 			n_env = n_env->next;
 		}
 	}
