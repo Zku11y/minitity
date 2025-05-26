@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:15:41 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/25 22:00:50 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/26 16:32:00 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ t_input *split_and_add(t_input **list, t_input **iter)
 {
     char **tmp;
     t_input *lst_tmp;
+    t_input *lst_tmp2;
     int i;
 
     lst_tmp = NULL;
@@ -184,6 +185,8 @@ t_input *split_and_add(t_input **list, t_input **iter)
     while(tmp[i])
     {
         ft_lstadd_back(&lst_tmp, tmp[i]);
+        lst_tmp2 = ft_lstlast(lst_tmp);
+        lst_tmp2->type = (*iter)->type;
         i++;
     }
     if((*iter) != *list)
@@ -192,8 +195,7 @@ t_input *split_and_add(t_input **list, t_input **iter)
         *list = lst_tmp;
     lst_tmp = ft_lstlast(lst_tmp);
     lst_tmp->next = (*iter)->next;
-    (*iter) = lst_tmp;
-    return (*list);
+    return ((*iter) = lst_tmp, *list);
 }
 
 t_input *money_expansion(t_input *list)
