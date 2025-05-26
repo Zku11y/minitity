@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   striper.c                                          :+:      :+:    :+:   */
+/*   money_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:15:41 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/23 23:11:32 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/25 22:00:50 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ t_input *split_and_add(t_input **list, t_input **iter)
     return (*list);
 }
 
-t_input *striper(t_input *list)
+t_input *money_expansion(t_input *list)
 {
     t_input *iter;
 

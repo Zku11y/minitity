@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Token_and_lex.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/23 22:56:51 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/26 16:22:56 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <signal.h>
-
+#include <dirent.h>
 
 // Tokens used to categorise each word in the input string.
 // R : right, L : left, S : single, D : double, O : opened, C : closed.
@@ -95,6 +95,13 @@ typedef struct s_flags
     int d_end;
 } t_flags;
 
+typedef struct s_star
+{
+    struct dirent *data;
+    struct s_star *next;
+    
+}   t_star;
+
 t_input *tokenize(char *line);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
@@ -127,6 +134,7 @@ void filter(t_input *list);
 void checker(char *line);
 void seperator(t_input *list);
 t_short *transformer(t_input *list);
-t_input *striper(t_input *list);
+t_input *money_expansion(t_input *list);
+t_input *star_expansion(t_input *list);
 char	**ft_split(char const *s);
 #endif

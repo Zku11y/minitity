@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/17 13:47:45 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/26 14:32:12 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void lst_assign(t_input **new, t_input **lst)
         ptr = ptr->next;
     }
     ptr->prev = prev;
+	if(ptr->prev)
+		(*new)->index = ptr->prev->index + 1;
 	ptr->next = (*new);
 	(*lst)->tail = ptr;
 }
