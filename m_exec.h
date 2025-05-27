@@ -19,8 +19,10 @@
 #include <string.h>
 #include <signal.h>
 #include <stdio.h>
+#include <readline/readline.h>
 
 #include "libft/libft.h"
+/*
 #include "m_bul/bul_cmd.h"
 #include "m_env/env.h"
 
@@ -30,7 +32,10 @@ typedef struct s_data
 	int				ex;
 	t_env			*env;
 }					t_data;
+*/
 
-void	hnd_sig(int signum, siginfo_t *info, void *cnt);
+int prompt_msg();
+
+// void	hnd_sig(int signum, siginfo_t *info, void *cnt);
 
 #endif // M_EXEC_H
