@@ -6,19 +6,21 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/26 14:32:12 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/27 19:02:16 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Token_and_lex.h"
 
-void	lst_print(t_input *head)
+void	lst_print(t_input *bruh)
 {
 	char	*data;
+	t_input *head;
 	// t_input *og;
 	int	size;
 
 	// og = head;
+	head = bruh;
 	size = 0;
 	if (!head)
 		printf("\033[1;31mhead 5awi a zmr\033[0m\n");
@@ -30,7 +32,6 @@ void	lst_print(t_input *head)
 			printf("\033[1;31m%s\033[0m", data);
 		else
 		{
-			printf("\033[1;31m%d > \033[0m", head->index);
 			if(head->type == TOKEN_WORD)
 				printf("\033[1;34m%s\033[0m", "WORD");
 			else if(head->type == TOKEN_OP)
@@ -70,6 +71,35 @@ void	lst_print(t_input *head)
 	}
 	printf("\033[1;35mNULL\033[0m");
 	printf("\033[1;33m %d\033[0m\n", size);
+}
+
+void lst_print2(t_short *list)
+{
+	int i;
+	while(list)
+	{
+		i = 0;
+		printf("\e[1;34m├───\e[0m\e[1;31m[%s]\e[0m", list->args[0]);
+		printf("    \e[1;34m\n│     │\e[0m\e[1;35mcmd+args\e[0m\n");
+		printf("\e[1;34m│\e[0m");
+		printf("    \e[1;34m ├──\e[0m");
+		while(list->args[i])
+		{
+			printf("\e[1;31m─\e[0m\e[1;31m[%s]\e[0m", list->args[i]);
+			i++;
+		}
+		printf("\n\e[1;34m│     │\e[0m\e[1;36mRedirects\e[0m\n");
+		printf("\e[1;34m│\e[0m");
+		printf("    \e[1;34m ├──\e[0m");
+		i = 0;
+		while(list->reds[i])
+		{
+			printf("\e[1;34m─\e[0m\e[1;31m[%s]\e[0m", list->reds[i]);
+			i++;
+		}
+		printf("\n");
+		list = list->next;
+	}
 }
 
 void lst_assign(t_input **new, t_input **lst)

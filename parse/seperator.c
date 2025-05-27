@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:13:20 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/09 11:45:37 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/27 18:39:42 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,7 @@ void handle_cmd(t_input *list)
             list->type = TOKEN_CMD;
             check = true;
         }
-        if(list->type == TOKEN_PIPE || list->type == TOKEN_AND)
-            check = false;
-        else if(list->type == TOKEN_OR || list->type == TOKEN_O_PAR)
-            check = false;
-        else if(list->type == TOKEN_C_PAR)
+        if(list->type == TOKEN_PIPE)
             check = false;
         list = list->next;
     }
@@ -53,8 +49,24 @@ void handle_arg(t_input *list)
     }
 }
 
+void handle_clear(t_input *list)
+{
+    t_input *tmp;
+
+    tmp = list;
+    while(tmp)
+    {
+        if(tmp->type == TOKEN_ARG || tmp->type == TOKEN_CMD)
+            tmp->type = TOKEN_WORD;
+        if(tmp->type == TOKEN_FILE)
+            tmp->type = TOKEN_WORD;
+        tmp = tmp->next;
+    }
+}
+
 void seperator(t_input *list)
 {
+    handle_clear(list);
     handle_file(list);
     handle_cmd(list);
     handle_arg(list);

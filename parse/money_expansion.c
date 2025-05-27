@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:15:41 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/26 16:32:00 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/27 13:56:34 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,6 @@ t_input *split_and_add(t_input **list, t_input **iter)
     {
         ft_lstadd_back(&lst_tmp, tmp[i]);
         lst_tmp2 = ft_lstlast(lst_tmp);
-        lst_tmp2->type = (*iter)->type;
         i++;
     }
     if((*iter) != *list)

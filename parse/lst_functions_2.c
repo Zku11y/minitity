@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 12:24:05 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/12 01:14:51 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/27 17:30:37 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,15 +87,16 @@ void lst_assign_2(t_short **new, t_short **lst)
 	(*lst)->tail = ptr;
 }
 
-void	ft_lstadd_back_2(t_short **lst, char **args, char **reds)
+void	ft_lstadd_back_2(t_short **lst, t_blah blah)
 {
     t_short *new;
 
 	new = ft_calloc(sizeof(t_short), 1);
 	if (new == NULL)
 		return ;
-	new->args = args;
-    new->reds = reds;
+	new->args = blah.args2;
+    new->reds = blah.reds2;
+	new->ambiguous = blah.ambiguous;
 	if (!lst || !new)
 		return ;
 	if (!*lst)

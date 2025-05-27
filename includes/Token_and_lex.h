@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/26 20:42:20 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/27 18:31:15 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_latest
     struct s_latest *next;
     struct s_latest *prev;
     struct s_latest *tail;
+    bool ambiguous;
 }   t_short;
 
 typedef struct s_size
@@ -95,6 +96,16 @@ typedef struct s_flags
     int d_end;
 } t_flags;
 
+typedef struct s_blah
+{
+    int args;
+    int reds;
+    int args_i;
+    int reds_i;
+    char **args2;
+    char **reds2;
+    bool ambiguous;
+} t_blah;
 typedef struct s_star
 {
     struct dirent *data;
@@ -108,15 +119,16 @@ char	*ft_strdup(const char *s1);
 char	*ft_strndup(const char *s1, int n);
 int	ft_strcmp(const char *s1, const char *s2);
 void	ft_lstadd_back(t_input **lst, char *content);
+void	ft_lstadd_back_2(t_short **lst, t_blah blah);
 t_input	*ft_lstlast(t_input *lst);
 size_t	ft_strlen(const char *s);
 void ft_lstfree(t_input *lst);
 bool is_space(char c);
-void	lst_print(t_input *head);
+void	lst_print(t_input *bruh);
 int prompt_msg();
 void ft_lstfree_2(t_short *lst);
 t_short	*ft_lstlast_2(t_short *lst);
-void	ft_lstadd_back_2(t_short **lst, char **args, char **reds);
+void	ft_lstadd_back_2(t_short **lst, t_blah blah);
 void lst_assign_2(t_short **new, t_short **lst);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strnjoin(char *s1, char *s2, int n);
@@ -138,4 +150,8 @@ t_input *money_expansion(t_input *list);
 t_input *star_expansion(t_input *list);
 char	**ft_split(char const *s);
 void striper(t_input *list);
+void lst_print2(t_short *list);
+int ft_checker(char c, int quote_flag);
+t_short *last_lst_creater(t_input *lst);
+
 #endif

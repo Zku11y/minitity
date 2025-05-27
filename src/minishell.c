@@ -6,7 +6,7 @@
 /*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:16:23 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/26 20:46:56 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/27 18:46:21 by mdakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void manager(char *line)
     input = money_expansion(input);
     input = star_expansion(input);
     striper(input);
-    lst_print(input);
+    shart = last_lst_creater(input);
+    // lst_print(input);
+    lst_print2(shart);
     // printf("\e[1;32mCums!\e[0m\n");
     // shart = transformer(input);
     ft_lstfree(input);
