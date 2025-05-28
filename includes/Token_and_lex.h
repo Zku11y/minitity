@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Token_and_lex.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/26 23:27:37 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/27 18:31:15 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/28 22:12:59 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,5 +153,6 @@ void striper(t_input *list);
 void lst_print2(t_short *list);
 int ft_checker(char c, int quote_flag);
 t_short *last_lst_creater(t_input *lst);
+void handle_clear(t_input *list, t_blah *blah);
 
 #endif

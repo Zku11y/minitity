@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:16:23 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/27 18:46:21 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/28 23:12:43 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main()
     // printf("\e[1;31mam about blauw\e[0m\n");
     // struct sigaction    s_sig;
 
-    atexit(t);
+    // atexit(t);
     // ft_memset(&s_sig, 0, sizeof(s_sig));
     // s_sig.sa_sigaction = hnd_sig;
     // s_sig.sa_flags = SA_SIGINFO;

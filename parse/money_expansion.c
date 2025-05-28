@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   money_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 18:15:41 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/27 13:56:34 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/28 22:17:06 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,12 +180,19 @@ t_input *split_and_add(t_input **list, t_input **iter)
     lst_tmp = NULL;
     i = 0;
     tmp = ft_split((*iter)->value);
-    if(!tmp || tmp[1] == NULL)
+    // while(tmp[i])
+    // {
+    //     printf("tmp[%d] = %s\n", i, tmp[i]);
+    //     i++;
+    // }
+    // i = 0;
+    if(!tmp || !tmp[0] || tmp[1] == NULL)
         return(*list);
     while(tmp[i])
     {
         ft_lstadd_back(&lst_tmp, tmp[i]);
         lst_tmp2 = ft_lstlast(lst_tmp);
+        lst_tmp2->type = (*iter)->type;
         i++;
     }
     if((*iter) != *list)

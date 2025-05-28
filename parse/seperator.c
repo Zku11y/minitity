@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   seperator.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:13:20 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/27 18:39:42 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/28 22:13:44 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ void handle_arg(t_input *list)
     }
 }
 
-void handle_clear(t_input *list)
+void handle_clear(t_input *list, t_blah *blah)
 {
     t_input *tmp;
 
     tmp = list;
-    while(tmp)
+    while(tmp && tmp->value)
     {
         if(tmp->type == TOKEN_ARG || tmp->type == TOKEN_CMD)
             tmp->type = TOKEN_WORD;
-        if(tmp->type == TOKEN_FILE)
+        if(tmp->type == TOKEN_FILE && !blah->ambiguous)
             tmp->type = TOKEN_WORD;
         tmp = tmp->next;
     }
@@ -66,7 +66,6 @@ void handle_clear(t_input *list)
 
 void seperator(t_input *list)
 {
-    handle_clear(list);
     handle_file(list);
     handle_cmd(list);
     handle_arg(list);

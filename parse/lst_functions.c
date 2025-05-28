@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/27 19:02:16 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/28 23:17:39 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,26 +78,46 @@ void lst_print2(t_short *list)
 	int i;
 	while(list)
 	{
-		i = 0;
-		printf("\e[1;34m├───\e[0m\e[1;31m[%s]\e[0m", list->args[0]);
-		printf("    \e[1;34m\n│     │\e[0m\e[1;35mcmd+args\e[0m\n");
-		printf("\e[1;34m│\e[0m");
-		printf("    \e[1;34m ├──\e[0m");
-		while(list->args[i])
+		if(list->args)
 		{
-			printf("\e[1;31m─\e[0m\e[1;31m[%s]\e[0m", list->args[i]);
-			i++;
+			i = 0;
+			printf("\e[1;34m├───\e[0m\e[1;31m[%s]\e[0m", list->args[0]);
+			printf("    \e[1;34m\n│     │\e[0m\e[1;35mcmd+args\e[0m\n");
+			printf("\e[1;34m│\e[0m");
+			printf("    \e[1;34m ├──\e[0m");
+			while(list->args[i])
+			{
+				printf("\e[1;31m─\e[0m\e[1;31m[%s]\e[0m", list->args[i]);
+				i++;
+			}
 		}
-		printf("\n\e[1;34m│     │\e[0m\e[1;36mRedirects\e[0m\n");
-		printf("\e[1;34m│\e[0m");
-		printf("    \e[1;34m ├──\e[0m");
-		i = 0;
-		while(list->reds[i])
+		else
 		{
-			printf("\e[1;34m─\e[0m\e[1;31m[%s]\e[0m", list->reds[i]);
-			i++;
+			printf("\e[1;34m├───\e[0m\e[1;31m[NULL]\e[0m");
+			printf("    \e[1;34m\n│     │\e[0m\e[1;35mcmd+args\e[0m\n");
+			printf("\e[1;34m│\e[0m");
+			printf("    \e[1;34m ├──\e[0m");
 		}
-		printf("\n");
+		if(list->reds)
+		{
+			printf("\n\e[1;34m│     │\e[0m\e[1;36mRedirects\e[0m\n");
+			printf("\e[1;34m│\e[0m");
+			printf("    \e[1;34m ├──\e[0m");
+			i = 0;
+			while(list->reds[i])
+			{
+				printf("\e[1;34m─\e[0m\e[1;31m[%s]\e[0m", list->reds[i]);
+				i++;
+			}
+			printf("\n");
+		}
+		else
+		{
+			printf("\n\e[1;34m│     │\e[0m\e[1;36mRedirects\e[0m\n");
+			printf("\e[1;34m│\e[0m");
+			printf("    \e[1;34m ├──\e[0m");
+			printf("\n");
+		}
 		list = list->next;
 	}
 }

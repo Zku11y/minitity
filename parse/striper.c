@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   striper.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 20:35:13 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/26 20:57:35 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/28 22:45:36 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ int calculate_size_blyat(char *niggers)
 {
     int i;
     int dick_size;
+    int quote_flag;
 
     i = 0;
     dick_size = 0;
+    quote_flag = 0;
     while(niggers[i])
     {
-        if(niggers[i] == '"' || niggers[i] == '\'')
+        quote_flag = ft_checker(niggers[i], quote_flag);
+        if((niggers[i] == '"' && quote_flag != 1) || (niggers[i] == '\'' && quote_flag != 2))
         {
             i++;
             continue;
@@ -29,32 +32,52 @@ int calculate_size_blyat(char *niggers)
         dick_size++;
         i++;
     }
+    printf(" size is : %d\n", dick_size);
     return(dick_size + 1);
+}
+
+char *tmp_assignment(t_input *list, int size)
+{
+    int i;
+    int j;
+    char *tmp;
+    int quote_flag;
+
+    i = 0;
+    j = 0;
+    tmp = NULL;
+    quote_flag = 0;
+    tmp = ft_calloc(size, 1);
+    if(tmp == NULL)
+        return NULL;
+    while(list->value[i])
+    {
+        quote_flag = ft_checker(list->value[i], quote_flag);
+        if((list->value[i] == '"'  && quote_flag != 1) || (list->value[i] == '\'' && quote_flag != 2))
+        {
+            i++;
+            continue;
+        }
+        tmp[j++] = list->value[i++];
+    }
+    tmp[j] = '\0';
+    return tmp;
 }
 
 void striper(t_input *list)
 {
     char *tmp;
-    int i;
-    int j;
+    int size;
 
     while(list->value)
     {
-        i = 0;
-        j = 0;
-        tmp = ft_calloc(calculate_size_blyat(list->value), 1);
-        if(tmp == NULL)
-            return;
-        while(list->value[i])
+        size = calculate_size_blyat(list->value);
+        if(size == 0)
         {
-            if(list->value[i] == '"' || list->value[i] == '\'')
-            {
-                i++;
-                continue;
-            }
-            tmp[j++] = list->value[i++];
+            list = list->next;
+           continue;
         }
-        tmp[j] = '\0';
+        tmp = tmp_assignment(list, size + 1);
         free(list->value);
         list->value = tmp;
         list = list->next;
