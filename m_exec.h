@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 05:18:51 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/25 06:49:55 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/26 07:33:34 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@
 #include <stdio.h>
 
 #include "libft/libft.h"
-#include "m_bul/bul_cmd.h"
+// #include "m_bul/bul_cmd.h"
 #include "m_env/env.h"
+
+typedef struct s_data t_data;
+
+typedef struct s_env t_env;
 
 typedef struct s_data
 {
@@ -31,6 +35,6 @@ typedef struct s_data
 	t_env			*env;
 }					t_data;
 
-void	hnd_sig(int signum, siginfo_t *info, void *cnt);
+// void	hnd_sig(int signum, siginfo_t *info, void *cnt);
 
 #endif // M_EXEC_H

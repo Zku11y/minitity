@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fd2 <fd2@student.42.fr>                    +#+  +:+       +#+         #
+#    By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/24 17:00:38 by oel-mado          #+#    #+#              #
-#    Updated: 2025/05/16 07:04:06 by fd2              ###   ########.fr        #
+#    Updated: 2025/05/29 08:36:54 by oel-mado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = ft_atoi.c\
 	ft_strlen.c\
 	ft_strmapi.c\
 	ft_strncmp.c\
+	ft_strcmp.c\
 	ft_strnstr.c\
 	ft_strrchr.c\
 	ft_strtrim.c\
