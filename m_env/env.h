@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:00:33 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/26 07:46:11 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/29 12:41:18 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		prn_port_env(t_data *data);
 int		fre_env(t_env *env);
 // int		del_env(t_env *env, char *key);
 t_env	*grp_env(t_env *env, char *key);
+char	*gky_env(t_env *env, char *key);
 t_env	*add_env(t_env *env, char *key, char *value, bool ported);
 
 #endif // ENV_H

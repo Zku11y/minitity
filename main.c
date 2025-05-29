@@ -7,7 +7,7 @@ int main(int ac, char **av, char **env)
 	data = ft_calloc(sizeof(data), 1);
 	data->fd = 1;
 	data->env = int_env(env);
-	prn_port_env(data);
+	//aaaaa
 	fre_env(data->env);
 	free(data);
 	return 0;
