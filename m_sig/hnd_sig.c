@@ -12,16 +12,11 @@
 
 #include "../m_exec.h"
 
-void	hnd_sig(int signum, siginfo_t *info, void *cnt)
+static void	hnd_sig(int sig)
 {
-	(void)cnt;
-	(void)info;
-	if (signum == SIGINT)
-	{
-		// if (prompt_msg())
-		// 	write(2, "Error: prompt_msg() dead\n", 7);
-		;;
-	}
-	else if (signum == SIGQUIT)
-		;;
+	(void)sig;
+  write(1, "\n", 1);
+  rl_replace_line("", 0);
+  rl_on_new_line();
+  rl_redisplay();
 }
