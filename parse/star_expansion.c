@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:41:23 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/28 22:31:03 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/29 19:08:17 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,18 @@ void ft_replace(t_input *add, t_input **iter, t_input **list)
     (*iter) = last;
 }
 
+void add_and_assign_token(t_input **iter, struct dirent *read, t_input **add)
+{
+    t_input *last;
+
+    if(wildcard_match((*iter)->value, read->d_name))
+    {
+        ft_lstadd_back(add, ft_strdup(read->d_name));
+        last = ft_lstlast(*add);
+        last->type = (*iter)->type;
+    }
+}
+
 void read_and_create(t_input **iter, int q_flag, int s_flag, t_input **list)
 {
     DIR *dir;
@@ -90,8 +102,9 @@ void read_and_create(t_input **iter, int q_flag, int s_flag, t_input **list)
             read = readdir(dir);
             continue;
         }
-        if(wildcard_match((*iter)->value, read->d_name))
-            ft_lstadd_back(&add, ft_strdup(read->d_name));
+        add_and_assign_token(iter, read, &add);
+        // if(wildcard_match((*iter)->value, read->d_name))
+        //     ft_lstadd_back(&add, ft_strdup(read->d_name));
         read = readdir(dir);
     }
     if(add)

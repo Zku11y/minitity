@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_functions_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 12:24:05 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/27 17:30:37 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/29 19:21:29 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,16 @@ void ft_lstfree_2(t_short *lst)
         i = 0;
         j = 0;
         tmp = lst;
-        while(lst->args[i])
+        while(lst->args && lst->args[i])
             free(lst->args[i++]);
-        while(lst->reds[j])
+        while(lst->reds && lst->reds[j])
             free(lst->reds[j++]);
-		free(lst->args);
-		free(lst->reds);
+		if(lst->args)
+			free(lst->args);
+		if(lst->reds)
+			free(lst->reds);
+		lst->args = NULL;
+		lst->reds = NULL;
 		lst = lst->next;
 		free(tmp);
 	}

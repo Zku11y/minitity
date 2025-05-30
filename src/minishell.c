@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 13:16:23 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/28 23:12:43 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/30 14:50:00 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void manager(char *line)
     t_input *input;
     t_short *shart;
 
-    (void)shart;
     // checker(line);
     input = tokenize(line);
     filter(input);
@@ -26,11 +25,12 @@ void manager(char *line)
     input = star_expansion(input);
     striper(input);
     shart = last_lst_creater(input);
-    // lst_print(input);
     lst_print2(shart);
+    // lst_print(input);
     // printf("\e[1;32mCums!\e[0m\n");
     // shart = transformer(input);
     ft_lstfree(input);
+    ft_lstfree_2(shart);
 }
 
 int prompt_msg()

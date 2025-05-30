@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdakni <mdakni@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:37:25 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/18 15:08:11 by mdakni           ###   ########.fr       */
+/*   Updated: 2025/05/30 13:37:35 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void syntax_error(t_token type, t_input *list, t_input *iter)
             printf("Syntax Error near unexpected Token '%s' \n", iter->next->value);
     }
     ft_lstfree(list);
-    exit(EXIT_FAILURE);
 }
 
 // this function manages the first level of syntax checking (words, operators, delimiters)
@@ -60,6 +59,6 @@ void filter(t_input *list)
             printf("Open Single Quote Error\n");
         if(list->quotes == 2)
             printf("Open Double Quote Error\n");
-        return(ft_lstfree(list), exit(EXIT_FAILURE));
+        return(ft_lstfree(list));
     }
 }

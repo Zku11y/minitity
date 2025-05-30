@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:42:16 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/28 23:17:39 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/30 14:48:11 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void lst_print2(t_short *list)
 		{
 			printf("\n\e[1;34m│     │\e[0m\e[1;36mRedirects\e[0m\n");
 			printf("\e[1;34m│\e[0m");
-			printf("    \e[1;34m ├──\e[0m");
+			printf("    \e[1;34m └──\e[0m");
 			i = 0;
 			while(list->reds[i])
 			{
@@ -115,7 +115,7 @@ void lst_print2(t_short *list)
 		{
 			printf("\n\e[1;34m│     │\e[0m\e[1;36mRedirects\e[0m\n");
 			printf("\e[1;34m│\e[0m");
-			printf("    \e[1;34m ├──\e[0m");
+			printf("    \e[1;34m └──\e[0m");
 			printf("\n");
 		}
 		list = list->next;

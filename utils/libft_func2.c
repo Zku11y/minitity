@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 17:59:49 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/23 20:47:13 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/30 14:16:15 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,6 @@ char	*ft_strnjoin(char *s1, char *s2, int n)
 	str = NULL;
 	if (!s1 && !s2)
 		return (ft_strdup(""));
-	// if (!s1)
-	// 	return (s2);
-	// if (!s2)
-	// 	return (s1);
 	str = malloc((ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (str == NULL)
 	return (NULL);

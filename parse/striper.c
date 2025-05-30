@@ -6,7 +6,7 @@
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 20:35:13 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/28 22:45:36 by skully           ###   ########.fr       */
+/*   Updated: 2025/05/30 14:37:32 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int calculate_size_blyat(char *niggers)
         dick_size++;
         i++;
     }
-    printf(" size is : %d\n", dick_size);
+    // printf(" size is : %d\n", dick_size);
     return(dick_size + 1);
 }
 

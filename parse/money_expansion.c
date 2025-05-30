@@ -5,12 +5,147 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skully <skully@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/17 18:15:41 by mdakni            #+#    #+#             */
-/*   Updated: 2025/05/28 22:17:06 by skully           ###   ########.fr       */
+/*   Created: 2025/05/30 14:50:07 by skully            #+#    #+#             */
+/*   Updated: 2025/05/30 14:50:08 by skully           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Token_and_lex.h"
+
+void expand_and_append(t_input *list, t_flags *check)
+{
+    //append what was previously read from outside $, then read until finishing $ then append what was read, then continue reading and appending
+    char *tmp;
+    char *tmp2;
+    char *tmp3;
+
+    check->string = ft_strnjoin(check->string, list->value + check->start, (check->end - 1) - check->start);
+    check->end++;
+    check->start = check->end;
+    if(!ft_isalpha(list->value[check->end]) && list->value[check->end] != '_')
+    {
+        check->string = ft_strnjoin(check->string, "$", 1);
+        return;
+    }
+    while(ft_isalnum(list->value[check->end]) || list->value[check->end] == '_')
+        check->end++;
+    tmp = ft_substr(list->value, check->start, (check->end) - check->start);
+    check->start = check->end;
+    tmp3 = getenv(tmp);
+    if(!tmp3)
+        return;
+    tmp2 = ft_strdup(tmp3);
+    free(tmp);
+    check->string = ft_strnjoin(check->string, tmp2, ft_strlen(tmp2));
+    free(tmp2);
+}
+
+void node_check(t_input *list, t_flags *check)
+{
+    if(list->value[check->end] == '"' && check->quotes != 1)
+    {
+        if(check->quotes == 2)
+            check->quotes = 0;
+        else
+            check->quotes = 2;
+    }
+    else if(list->value[check->end] == '\'' && check->quotes != 2)
+    {
+        if(check->quotes == 1)
+            check->quotes = 0;
+        else
+            check->quotes = 1;
+    }
+    if(list->value[check->end] == '$' && check->quotes != 1)
+        expand_and_append(list, check);
+    else
+        check->end++;
+    if(list->value[check->end] == '\0')
+        check->string = ft_strnjoin(check->string, list->value + check->start, (check->end - 1) - check->start);
+}
+
+void node_mod(t_input *list)
+{
+    t_flags check;
+
+    check.string = NULL;
+    check.expand = NULL;
+    check.start = 0;
+    check.end = 0;
+    check.d_end = 0;
+    check.d_start = 0;
+    check.quotes = 0;
+    while(list->value[check.end])
+        node_check(list, &check);
+    free(list->value);
+    list->value = check.string;
+}
+
+void free_split(char **split)
+{
+    int i;
+
+    i = 0;
+    while(split[i])
+    {
+        free(split[i]);
+        i++;
+    }
+    free(split);
+}
+
+t_input *split_and_add(t_input **list, t_input **iter)
+{
+    char **tmp;
+    t_input *lst_tmp;
+    t_input *lst_tmp2;
+    int i;
+
+    lst_tmp = NULL;
+    i = 0;
+    tmp = ft_split((*iter)->value);
+    if(!tmp || !tmp[0] || tmp[1] == NULL)
+        return(free_split(tmp) ,*list);
+    while(tmp[i])
+    {
+        ft_lstadd_back(&lst_tmp, ft_strdup(tmp[i]));
+        lst_tmp2 = ft_lstlast(lst_tmp);
+        lst_tmp2->type = (*iter)->type;
+        i++;
+    }
+    free_split(tmp);
+    if((*iter) != *list)
+    {
+        (*iter)->prev->next = lst_tmp;
+        lst_tmp->prev = (*iter)->prev;
+    }
+    else
+        *list = lst_tmp;
+    lst_tmp = ft_lstlast(lst_tmp);
+    lst_tmp->next = (*iter)->next;
+    (*iter)->next = NULL;
+    ft_lstfree(*iter);
+    return ((*iter) = lst_tmp, *list);
+}
+
+t_input *money_expansion(t_input *list)
+{
+    t_input *iter;
+
+    iter = list;
+    while(iter->value)
+    {
+        if(iter->type == TOKEN_L_APP)
+        {
+            iter = iter->next->next;
+            continue;
+        }
+        node_mod(iter);
+        list = split_and_add(&list, &iter);
+        iter = iter->next;
+    }
+    return(list);
+}
 
 // // char *append_string(t_input *list, t_flags *check, bool dollar)
 // // {
@@ -101,127 +236,6 @@
 //     // free(tmp2);
 // }
 
-void expand_and_append(t_input *list, t_flags *check)
-{
-    //append what was previously read from outside $, then read until finishing $ then append what was read, then continue reading and appending
-    char *tmp;
-    char *tmp2;
-    char *tmp3;
-
-    check->string = ft_strnjoin(check->string, list->value + check->start, (check->end - 1) - check->start);
-    check->end++;
-    check->start = check->end;
-    if(!ft_isalpha(list->value[check->end]) && list->value[check->end] != '_')
-    {
-        check->string = ft_strnjoin(check->string, "$", 1);
-        return;
-    }
-    while(ft_isalnum(list->value[check->end]) || list->value[check->end] == '_')
-        check->end++;
-    tmp = ft_substr(list->value, check->start, (check->end) - check->start);
-    check->start = check->end;
-    tmp3 = getenv(tmp);
-    if(!tmp3)
-        return;
-    tmp2 = ft_strdup(tmp3);
-    // free(tmp);
-    check->string = ft_strnjoin(check->string, tmp2, ft_strlen(tmp2));
-    // free(tmp2);
-}
-
-void node_check(t_input *list, t_flags *check)
-{
-    if(list->value[check->end] == '"' && check->quotes != 1)
-    {
-        if(check->quotes == 2)
-            check->quotes = 0;
-        else
-            check->quotes = 2;
-    }
-    else if(list->value[check->end] == '\'' && check->quotes != 2)
-    {
-        if(check->quotes == 1)
-            check->quotes = 0;
-        else
-            check->quotes = 1;
-    }
-    if(list->value[check->end] == '$' && check->quotes != 1)
-        expand_and_append(list, check);
-    else
-        check->end++;
-    if(list->value[check->end] == '\0')
-        check->string = ft_strnjoin(check->string, list->value + check->start, (check->end - 1) - check->start);
-}
-
-void node_mod(t_input *list)
-{
-    t_flags check;
-
-    check.string = NULL;
-    check.expand = NULL;
-    check.start = 0;
-    check.end = 0;
-    check.d_end = 0;
-    check.d_start = 0;
-    check.quotes = 0;
-    while(list->value[check.end])
-        node_check(list, &check);
-    // free(list->value);
-    list->value = check.string;
-}
-
-t_input *split_and_add(t_input **list, t_input **iter)
-{
-    char **tmp;
-    t_input *lst_tmp;
-    t_input *lst_tmp2;
-    int i;
-
-    lst_tmp = NULL;
-    i = 0;
-    tmp = ft_split((*iter)->value);
-    // while(tmp[i])
-    // {
-    //     printf("tmp[%d] = %s\n", i, tmp[i]);
-    //     i++;
-    // }
-    // i = 0;
-    if(!tmp || !tmp[0] || tmp[1] == NULL)
-        return(*list);
-    while(tmp[i])
-    {
-        ft_lstadd_back(&lst_tmp, tmp[i]);
-        lst_tmp2 = ft_lstlast(lst_tmp);
-        lst_tmp2->type = (*iter)->type;
-        i++;
-    }
-    if((*iter) != *list)
-        (*iter)->prev->next = lst_tmp;
-    else
-        *list = lst_tmp;
-    lst_tmp = ft_lstlast(lst_tmp);
-    lst_tmp->next = (*iter)->next;
-    return ((*iter) = lst_tmp, *list);
-}
-
-t_input *money_expansion(t_input *list)
-{
-    t_input *iter;
-
-    iter = list;
-    while(iter->value)
-    {
-        if(iter->type == TOKEN_L_APP)
-        {
-            iter = iter->next->next;
-            continue;
-        }
-        node_mod(iter);
-        list = split_and_add(&list, &iter);
-        iter = iter->next;
-    }
-    return(list);
-}
 // void string_app(t_input *list, t_flags *check, bool flag)
 // {
 //     char *tmp;
