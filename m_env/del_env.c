@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 21:52:25 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/25 08:34:34 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/30 22:54:23 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int del_env(t_env *env, char *key)
     t_env   *pr_env;
     int     l;
 
-    if (key == NULL || env == NULL)
+    if (env == NULL)
         return (1);
     tm_env = env;
     l = ft_strlen(key);

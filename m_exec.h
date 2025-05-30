@@ -6,7 +6,7 @@
 /*   By: oel-mado <oel-mado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 05:18:51 by oel-mado          #+#    #+#             */
-/*   Updated: 2025/05/29 09:58:01 by oel-mado         ###   ########.fr       */
+/*   Updated: 2025/05/30 22:49:53 by oel-mado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_data
 
 // void	hnd_sig(int signum, siginfo_t *info, void *cnt);
 
-int prompt_msg();
+// int prompt_msg();
 
 // void	hnd_sig(int signum, siginfo_t *info, void *cnt);
 

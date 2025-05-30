@@ -19,4 +19,3 @@ clean:
 	@echo "Cleaning up..."
 	@rm -f $(NAME)
 	@echo "Cleaned up $(NAME)"
-
